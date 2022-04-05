@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/titleScreen"
-        android:name="com.example.android.navigationadvancedsample.homescreen.Title"
+        android:name="com.example.android.navigationadvancedsample.homescreen.TitleFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_title">
         <action
