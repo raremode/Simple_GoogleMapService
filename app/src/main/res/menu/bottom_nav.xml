@@ -19,16 +19,16 @@
     <item
         android:id="@+id/home"
         android:contentDescription="@string/cd_home"
-        android:icon="@drawable/mapbutton"
-        android:title=" " />
+        android:icon="@drawable/iconmap"
+        android:title="Карта" />
     <item
         android:id="@+id/list"
         android:contentDescription="@string/cd_list"
-        android:icon="@drawable/settingsbutton"
-        android:title=" " />
+        android:icon="@drawable/iconsettings"
+        android:title="Настройки" />
     <item
         android:id="@+id/form"
-        android:icon="@drawable/ic_feedback"
         android:contentDescription="@string/cd_form"
-        android:title="@string/title_register" />
+        android:icon="@drawable/iconaccount"
+        android:title="Аккаунт" />
 </menu>

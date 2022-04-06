@@ -28,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@drawable/navbackground"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph" />
 
@@ -35,6 +36,6 @@
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        app:menu="@menu/bottom_nav"/>
+        android:background="@drawable/navbackground"
+        app:menu="@menu/bottom_nav" />
 </LinearLayout>
