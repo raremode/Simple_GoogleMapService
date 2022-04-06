@@ -25,7 +25,7 @@ class UiSettingsDemoActivity :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_title)
         val mapFragment: SupportMapFragment =
-            supportFragmentManager.findFragmentById(R.id.mapsee) as SupportMapFragment
+            supportFragmentManager.findFragmentById(R.id.ftMapGoogle) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
