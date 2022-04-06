@@ -48,7 +48,7 @@ import kotlin.concurrent.schedule
  * Shows the main title screen with a button that navigates to [About].
  */
 //TODO я переименовал из Title в TitleFragment. Если это фрагмент, то добавляй это обозначение, иначе в большом проекте запутаешься.
-class Title : Fragment() {
+class TitleFragment : Fragment() {
 
     private lateinit var mapFragment: SupportMapFragment
     private val TAG = "MapActivity"
