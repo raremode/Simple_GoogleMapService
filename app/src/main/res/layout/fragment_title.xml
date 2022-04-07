@@ -52,7 +52,7 @@
         <Button
             android:id="@+id/filterAll"
             android:layout_width="48dp"
-            android:layout_height="36dp"
+            android:layout_height="48dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/ovalbuttons"
@@ -64,7 +64,7 @@
         <Button
             android:id="@+id/filterPlastic"
             android:layout_width="85dp"
-            android:layout_height="36dp"
+            android:layout_height="50dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/ovalbuttons"
@@ -76,7 +76,7 @@
         <Button
             android:id="@+id/filterGlass"
             android:layout_width="75dp"
-            android:layout_height="36dp"
+            android:layout_height="50dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/ovalbuttons"
@@ -88,7 +88,7 @@
         <Button
             android:id="@+id/filterBatteries"
             android:layout_width="95dp"
-            android:layout_height="36dp"
+            android:layout_height="48dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="24dp"
             android:background="@drawable/ovalbuttons"

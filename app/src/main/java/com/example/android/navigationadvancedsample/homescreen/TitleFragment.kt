@@ -42,6 +42,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import java.util.*
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 import kotlin.concurrent.schedule
 
 
@@ -98,8 +100,17 @@ class TitleFragment : Fragment() {
         buttonFilterGlass = view.findViewById(R.id.filterGlass) as Button
         buttonFilterBatteries = view.findViewById(R.id.filterBatteries) as Button
 
+        filterClickListener()
+
+        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(Runnable {
+            updateLocation()
+            Log.d (TAG, "UpdateLocation: updated well")
+        }, 0, 10, TimeUnit.SECONDS) //постоянное обновление местоположения пользователя!
+    }
+
+    private fun filterClickListener(){
         buttonFilterAll.setOnClickListener {
-          //  buttonFilterAll.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            //  buttonFilterAll.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             buttonFilterAll.setBackgroundResource(R.drawable.ovalbuttons_ontap)
             buttonFilterPlastic.setBackgroundResource(R.drawable.ovalbuttons)
             buttonFilterGlass.setBackgroundResource(R.drawable.ovalbuttons)
@@ -189,6 +200,33 @@ class TitleFragment : Fragment() {
             }
         } catch (e: SecurityException) {
             Log.e(TAG, "getDeviceLocation: SecurityException: " + e.message)
+        }
+    }
+
+    private fun updateLocation(){
+        Log.d(TAG, "updateLocation: getting the devices current location")
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
+        try {
+            if (locationPermissionsGranted) {
+                val location = fusedLocationProviderClient?.lastLocation
+                location?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "onComplete: found NEW location!")
+                        val currentLocation = task.result
+                        setMyselfMarker(currentLocation = currentLocation)
+                    } else {
+                        Log.d(TAG, "onComplete: current location is null")
+                        Toast.makeText(
+                            context,
+                            "unable to get current location",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        } catch (e: SecurityException) {
+            Log.e(TAG, "updateLocation: SecurityException: " + e.message)
         }
     }
 
