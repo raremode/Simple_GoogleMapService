@@ -25,6 +25,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -42,6 +43,9 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import java.util.*
 import kotlin.concurrent.schedule
+
+
+
 
 
 /**
@@ -69,6 +73,13 @@ class TitleFragment : Fragment() {
     lateinit var myTimer : Timer
     val uiHandler: Handler = Handler()
 
+    lateinit var buttonFilterAll : Button
+    lateinit var buttonFilterPlastic : Button
+    lateinit var buttonFilterGlass : Button
+    lateinit var buttonFilterBatteries : Button
+    var typeFilter : Int = 1 //1-всё, 2-пластик, 3-стекло, 4-батарейки. По умолчанию включается "1"
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -81,8 +92,59 @@ class TitleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getLocationPermission()
-        setGarbageMarkers()
 
+        buttonFilterAll = view.findViewById(R.id.filterAll) as Button
+        buttonFilterPlastic = view.findViewById(R.id.filterPlastic) as Button
+        buttonFilterGlass = view.findViewById(R.id.filterGlass) as Button
+        buttonFilterBatteries = view.findViewById(R.id.filterBatteries) as Button
+
+        buttonFilterAll.setOnClickListener {
+          //  buttonFilterAll.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            buttonFilterAll.setBackgroundResource(R.drawable.ovalbuttons_ontap)
+            buttonFilterPlastic.setBackgroundResource(R.drawable.ovalbuttons)
+            buttonFilterGlass.setBackgroundResource(R.drawable.ovalbuttons)
+            buttonFilterBatteries.setBackgroundResource(R.drawable.ovalbuttons)
+            //...
+            typeFilter = 1
+            Log.d (TAG, "Type = " + typeFilter)
+            setGarbageMarkers()
+        }
+
+        buttonFilterPlastic.setOnClickListener {
+            //  buttonFilterAll.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            buttonFilterPlastic.setBackgroundResource(R.drawable.ovalbuttons_ontap)
+            buttonFilterAll.setBackgroundResource(R.drawable.ovalbuttons)
+            buttonFilterGlass.setBackgroundResource(R.drawable.ovalbuttons)
+            buttonFilterBatteries.setBackgroundResource(R.drawable.ovalbuttons)
+            //...
+            typeFilter = 2
+            Log.d (TAG, "Type = " + typeFilter)
+            setGarbageMarkers()
+        }
+
+        buttonFilterGlass.setOnClickListener {
+            //  buttonFilterAll.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            buttonFilterGlass.setBackgroundResource(R.drawable.ovalbuttons_ontap)
+            buttonFilterAll.setBackgroundResource(R.drawable.ovalbuttons)
+            buttonFilterPlastic.setBackgroundResource(R.drawable.ovalbuttons)
+            buttonFilterBatteries.setBackgroundResource(R.drawable.ovalbuttons)
+            //...
+            typeFilter = 3
+            Log.d (TAG, "Type = " + typeFilter)
+            setGarbageMarkers()
+        }
+
+        buttonFilterBatteries.setOnClickListener {
+            //  buttonFilterAll.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            buttonFilterBatteries.setBackgroundResource(R.drawable.ovalbuttons_ontap)
+            buttonFilterAll.setBackgroundResource(R.drawable.ovalbuttons)
+            buttonFilterPlastic.setBackgroundResource(R.drawable.ovalbuttons)
+            buttonFilterGlass.setBackgroundResource(R.drawable.ovalbuttons)
+            //...
+            typeFilter = 4
+            Log.d (TAG, "Type = " + typeFilter)
+            setGarbageMarkers()
+        }
     }
 
     private fun getDeviceLocation() {
@@ -160,6 +222,9 @@ class TitleFragment : Fragment() {
                     map?.isMyLocationEnabled = true
                 map?.uiSettings?.isMyLocationButtonEnabled = true
                 map?.uiSettings?.isZoomControlsEnabled = true
+
+                setDefaultTypeMarkers()
+                setGarbageMarkers()
             }
         }
     }
@@ -171,7 +236,8 @@ class TitleFragment : Fragment() {
         //     addMarker(MarkerOptions().position(myLocationMarker).title("Marker in My own location").icon(BitmapDescriptorFactory.fromResource(R.drawable.amu_bubble_mask))) //сделать нормальный значок метки пользователя
         //     moveCamera(CameraUpdateFactory.newLatLng(myLocationMarker))
     //}
-      var options : MarkerOptions = MarkerOptions().position(myLocationMarker).title("My own Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.amu_bubble_mask))
+      val options : MarkerOptions = MarkerOptions().position(myLocationMarker).title("My own Location").icon(BitmapDescriptorFactory.fromResource(
+          R.drawable.marker))
         myMarker = map?.addMarker(options)!!
 
     }
@@ -180,12 +246,69 @@ class TitleFragment : Fragment() {
     myMarker.remove()
     }
 
+    private fun setDefaultTypeMarkers(){
+        buttonFilterAll.setBackgroundResource(R.drawable.ovalbuttons_ontap)
+        buttonFilterPlastic.setBackgroundResource(R.drawable.ovalbuttons)
+        buttonFilterGlass.setBackgroundResource(R.drawable.ovalbuttons)
+        buttonFilterBatteries.setBackgroundResource(R.drawable.ovalbuttons)
+        //...
+        typeFilter = 1
+        Log.d (TAG, "Type = " + typeFilter)
+    }
+
     private fun setGarbageMarkers(){
-        val sydney = LatLng(47.2025869, 38.9031823)
-        map?.addMarker(
-            MarkerOptions()
-                .position(sydney)
-        )
+        val plastic = LatLng(47.205242, 38.909498)
+        val steklo = LatLng(47.206616, 38.904884)
+        val batareika = LatLng(47.208862, 38.910366)
+
+        when (typeFilter) {
+            1 -> {
+                map?.clear()
+                getDeviceLocation()
+
+                map?.addMarker(
+                    MarkerOptions()
+                        .position(plastic)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+
+                map?.addMarker(
+                    MarkerOptions()
+                        .position(steklo)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+
+                map?.addMarker(
+                    MarkerOptions()
+                        .position(batareika)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+            }
+            2 -> {
+                map?.clear()
+                getDeviceLocation()
+
+                map?.addMarker(
+                    MarkerOptions()
+                        .position(plastic)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+            }
+            3 -> {
+                map?.clear()
+                getDeviceLocation()
+
+                map?.addMarker(
+                    MarkerOptions()
+                        .position(steklo)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+            }
+            4 -> {
+                map?.clear()
+                getDeviceLocation()
+
+                map?.addMarker(
+                    MarkerOptions()
+                        .position(batareika)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+            }
+        }
     }
 
     private fun getLocationPermission() {

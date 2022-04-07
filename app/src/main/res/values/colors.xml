@@ -16,9 +16,12 @@
   -->
 
 <resources>
+    <color name="colorPrimaryBright">#AECA1E</color>
+    <color name="colorActionBar">#000000</color>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#7e53c5</color>
     <color name="colorTap">#000000</color>
     <color name="colorNavigation">#FAFCEE</color>
+    <color name="colorButtons">#DBEA8D</color>
 </resources>
