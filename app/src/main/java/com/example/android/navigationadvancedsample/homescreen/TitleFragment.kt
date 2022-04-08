@@ -338,6 +338,7 @@ class TitleFragment : Fragment() {
 
                 var locationList: ArrayList<LatLng> = databaseWork.getGarbageLocations(0)
                 var locationType: ArrayList<Int> = databaseWork.getGarbageTypes()
+                Log.d(TAG, "getDataBaseInfo: getting was successfully!")
 
                 for (i in 0 until (locationType.size)) {
                     when (locationType[i]) {
@@ -380,32 +381,87 @@ class TitleFragment : Fragment() {
 
 
             }
-            2 -> {
+            2 -> { //eto plastic
                 map?.clear()
                 getDeviceLocation()
 
-                map?.addMarker(
-                    MarkerOptions()
-                        .position(plastic)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                var locationLength: Int = databaseWork.get_value()
+                Log.d(TAG, "length of database=" + locationLength)
+                if (locationLength != 0) {
+
+                    var locationList: ArrayList<LatLng> = databaseWork.getGarbageLocations(1)
+
+                    for (i in 0 until (locationList.size)) {
+
+                        map?.addMarker(
+                            MarkerOptions()
+                                .position(locationList[i])
+                                .icon(
+                                    BitmapDescriptorFactory.defaultMarker(
+                                        BitmapDescriptorFactory.HUE_RED
+                                    )
+                                )
+                        )
+
+                    }
+
+                    Log.d(TAG, "getDataBaseInfo: getting was successfully!")
+                }
+
             }
-            3 -> {
+            3 -> { //eto steklo
                 map?.clear()
                 getDeviceLocation()
 
-                map?.addMarker(
-                    MarkerOptions()
-                        .position(steklo)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+                var locationLength: Int = databaseWork.get_value()
+                Log.d(TAG, "length of database=" + locationLength)
+                if (locationLength != 0) {
+
+                    var locationList: ArrayList<LatLng> = databaseWork.getGarbageLocations(2)
+
+                    for (i in 0 until (locationList.size)) {
+
+                        map?.addMarker(
+                            MarkerOptions()
+                                .position(locationList[i])
+                                .icon(
+                                    BitmapDescriptorFactory.defaultMarker(
+                                        BitmapDescriptorFactory.HUE_ORANGE
+                                    )
+                                )
+                        )
+
+                    }
+
+                    Log.d(TAG, "getDataBaseInfo: getting was successfully!")
+                }
             }
             4 -> {
                 map?.clear()
                 getDeviceLocation()
 
-                map?.addMarker(
-                    MarkerOptions()
-                        .position(batareika)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+                var locationLength: Int = databaseWork.get_value()
+                Log.d(TAG, "length of database=" + locationLength)
+                if (locationLength != 0) {
+
+                    var locationList: ArrayList<LatLng> = databaseWork.getGarbageLocations(3)
+
+                    for (i in 0 until (locationList.size)) {
+
+                        map?.addMarker(
+                            MarkerOptions()
+                                .position(locationList[i])
+                                .icon(
+                                    BitmapDescriptorFactory.defaultMarker(
+                                        BitmapDescriptorFactory.HUE_GREEN
+                                    )
+                                )
+                        )
+
+                    }
+
+                    Log.d(TAG, "getDataBaseInfo: getting was successfully!")
+                }
             }
         }
     }

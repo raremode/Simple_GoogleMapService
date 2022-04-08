@@ -63,7 +63,6 @@ dependencies {
 
     implementation 'pub.devrel:easypermissions:3.0.0'
 
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation deps.kotlin.stdlib
     implementation deps.app_compat
