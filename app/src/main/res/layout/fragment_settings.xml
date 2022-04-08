@@ -11,10 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:ems="10"
-        android:inputType="number"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/getLongitude"
@@ -22,10 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:ems="10"
-        android:inputType="number"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/getLatitude" />
+        app:layout_constraintTop_toBottomOf="@+id/getLatitude"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView"
@@ -48,4 +50,43 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/choicePlastic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="пластик"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/choiceGlass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:text="стекло"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/choicePlastic"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/choiceBatteries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="батарейки"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toEndOf="@+id/choiceGlass"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/sendRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="отправить"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="480dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

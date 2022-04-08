@@ -32,6 +32,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.android.navigationadvancedsample.R
+import com.example.android.navigationadvancedsample.listscreen.DataBase_work
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -44,6 +45,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule
 
 
@@ -81,6 +83,9 @@ class TitleFragment : Fragment() {
     lateinit var buttonFilterBatteries : Button
     var typeFilter : Int = 1 //1-всё, 2-пластик, 3-стекло, 4-батарейки. По умолчанию включается "1"
 
+    var markerDataBase : ArrayList<LatLng> = ArrayList(5)
+    private lateinit var databaseWork : DataBase_work
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -93,7 +98,10 @@ class TitleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fillMarkerDataBase()
         getLocationPermission()
+
+        databaseWork = DataBase_work(context)
 
         buttonFilterAll = view.findViewById(R.id.filterAll) as Button
         buttonFilterPlastic = view.findViewById(R.id.filterPlastic) as Button
@@ -106,6 +114,19 @@ class TitleFragment : Fragment() {
             updateLocation()
             Log.d (TAG, "UpdateLocation: updated well")
         }, 0, 10, TimeUnit.SECONDS) //постоянное обновление местоположения пользователя!
+    }
+
+    private fun fillMarkerDataBase(){
+        var x : Double= 47.2
+        var y : Double= 38.9
+        var plus : Double = 0.005
+        for (i in 0..5){
+       //  var newlatlng : LatLng = LatLng(x, y)
+       // markerDataBase[i]= LatLng(x, y)
+           markerDataBase.add(LatLng(x, y))
+            x += plus
+            y += plus
+        }
     }
 
     private fun filterClickListener(){
@@ -260,6 +281,7 @@ class TitleFragment : Fragment() {
                     map?.isMyLocationEnabled = true
                 map?.uiSettings?.isMyLocationButtonEnabled = true
                 map?.uiSettings?.isZoomControlsEnabled = true
+                map?.uiSettings?.isMapToolbarEnabled = false
 
                 setDefaultTypeMarkers()
                 setGarbageMarkers()
@@ -274,7 +296,7 @@ class TitleFragment : Fragment() {
         //     addMarker(MarkerOptions().position(myLocationMarker).title("Marker in My own location").icon(BitmapDescriptorFactory.fromResource(R.drawable.amu_bubble_mask))) //сделать нормальный значок метки пользователя
         //     moveCamera(CameraUpdateFactory.newLatLng(myLocationMarker))
     //}
-      val options : MarkerOptions = MarkerOptions().position(myLocationMarker).title("My own Location").icon(BitmapDescriptorFactory.fromResource(
+      val options : MarkerOptions = MarkerOptions().position(myLocationMarker).title("Ваше местоположение").icon(BitmapDescriptorFactory.fromResource(
           R.drawable.marker))
         myMarker = map?.addMarker(options)!!
 
@@ -304,20 +326,59 @@ class TitleFragment : Fragment() {
                 map?.clear()
                 getDeviceLocation()
 
-                map?.addMarker(
-                    MarkerOptions()
-                        .position(plastic)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)))
+                /* for (i in 0..5){
+                    map?.addMarker(
+                        MarkerOptions()
+                            .position(markerDataBase[i])
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+                } */ //тест малого массива точек на карту
+                var locationLength: Int = databaseWork.get_value()
+                Log.d(TAG, "length of database=" + locationLength)
+                if (locationLength != 0) {
 
-                map?.addMarker(
-                    MarkerOptions()
-                        .position(steklo)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+                var locationList: ArrayList<LatLng> = databaseWork.getGarbageLocations(0)
+                var locationType: ArrayList<Int> = databaseWork.getGarbageTypes()
 
-                map?.addMarker(
-                    MarkerOptions()
-                        .position(batareika)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+                for (i in 0 until (locationType.size)) {
+                    when (locationType[i]) {
+                        1 -> {
+                            map?.addMarker(
+                                MarkerOptions()
+                                    .position(locationList[i])
+                                    .icon(
+                                        BitmapDescriptorFactory.defaultMarker(
+                                            BitmapDescriptorFactory.HUE_RED
+                                        )
+                                    )
+                            )
+                        }
+                        2 -> {
+                            map?.addMarker(
+                                MarkerOptions()
+                                    .position(locationList[i])
+                                    .icon(
+                                        BitmapDescriptorFactory.defaultMarker(
+                                            BitmapDescriptorFactory.HUE_ORANGE
+                                        )
+                                    )
+                            )
+                        }
+                        3 -> {
+                            map?.addMarker(
+                                MarkerOptions()
+                                    .position(locationList[i])
+                                    .icon(
+                                        BitmapDescriptorFactory.defaultMarker(
+                                            BitmapDescriptorFactory.HUE_GREEN
+                                        )
+                                    )
+                            )
+                        }
+                    }
+                }
+            }
+
+
             }
             2 -> {
                 map?.clear()

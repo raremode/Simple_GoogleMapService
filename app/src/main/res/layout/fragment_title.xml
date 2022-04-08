@@ -37,65 +37,76 @@
 
         <ImageButton
             android:id="@+id/gpsRefresh"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="344dp"
-            android:layout_marginBottom="28dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/fon"
             android:scaleType="fitCenter"
             android:src="@drawable/refreshlocation"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.017"
+            app:layout_constraintStart_toStartOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <Button
+            android:id="@+id/filterBatteries"
+            android:layout_width="84dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ovalbuttons"
+            android:text="батарейки"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/filterPlastic"
+            android:layout_width="72dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/ovalbuttons"
+            android:text="Пластик"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/filterAll"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <Button
             android:id="@+id/filterAll"
             android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="20dp"
             android:background="@drawable/ovalbuttons"
             android:text="Всё"
             android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/filterPlastic"
-            android:layout_width="85dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/ovalbuttons"
-            android:text="Пластик"
-            android:textSize="10sp"
-            app:layout_constraintStart_toEndOf="@+id/filterAll"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <Button
             android:id="@+id/filterGlass"
-            android:layout_width="75dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
+            android:layout_width="72dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/ovalbuttons"
             android:text="стекло"
             android:textSize="10sp"
-            app:layout_constraintStart_toEndOf="@+id/filterPlastic"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/filterBatteries"
-            android:layout_width="95dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/ovalbuttons"
-            android:text="батарейки"
-            android:textSize="10sp"
-            app:layout_constraintStart_toEndOf="@+id/filterGlass"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/filterBatteries"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="TouchTargetSizeCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

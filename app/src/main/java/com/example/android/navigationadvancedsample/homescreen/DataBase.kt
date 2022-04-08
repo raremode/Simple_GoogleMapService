@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper
 class DataBase(context: Context?) :
     SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("create table $DB_MARKERS($TYPEFILTER integer, $LATITUDE text,$LONGITUDE text )")
+        db.execSQL("create table $DB_MARKERS($TYPEFILTER integer, $LATITUDE real,$LONGITUDE real )")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
