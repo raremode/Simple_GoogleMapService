@@ -3,7 +3,7 @@
     {
       "id": 0,
       "name": "Place0",
-      "garbageTypes": "Plastic",
+      "garbageType": "Plastic",
       "coordinates": {
         "latitude": "39.02",
         "longitude": "40.27"
@@ -13,7 +13,7 @@
     {
       "id": 1,
       "name": "Place1",
-      "garbageTypes": "Glass",
+      "garbageType": "Glass",
       "coordinates": {
         "latitude": "39.22",
         "longitude": "40.17"
@@ -23,7 +23,7 @@
     {
       "id": 2,
       "name": "Place2",
-      "garbageTypes": "Batteries",
+      "garbageType": "Batteries",
       "coordinates": {
         "latitude": "39.42",
         "longitude": "40.07"
