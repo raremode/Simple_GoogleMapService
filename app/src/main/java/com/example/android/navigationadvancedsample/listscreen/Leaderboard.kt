@@ -1,19 +1,3 @@
-/*
- * Copyright 2019, The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example.android.navigationadvancedsample.listscreen
 
 import android.os.Bundle
@@ -23,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.android.navigationadvancedsample.R
-import com.example.android.navigationadvancedsample.homescreen.DataBase_work
+import com.example.android.navigationadvancedsample.homescreen.DataBaseWork
 
 /**
  * Shows a static leaderboard with multiple users.
@@ -42,7 +26,7 @@ class Leaderboard : Fragment() {
     lateinit var fieldLatitude : EditText
     lateinit var fieldLongitude : EditText
 
-    private lateinit var databaseWork : DataBase_work
+    private lateinit var databaseWork : DataBaseWork
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -64,7 +48,7 @@ class Leaderboard : Fragment() {
         fieldLatitude = view.findViewById(R.id.getLatitude) as EditText
         fieldLongitude = view.findViewById(R.id.getLongitude) as EditText
 
-        databaseWork = DataBase_work(context)
+        databaseWork = DataBaseWork(context)
         choiceClickListener()
     }
 

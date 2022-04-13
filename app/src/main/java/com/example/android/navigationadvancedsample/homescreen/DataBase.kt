@@ -3,9 +3,6 @@ package com.example.android.navigationadvancedsample.homescreen
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-//import com.google.firebase.database.DatabaseReference
-//import com.google.firebase.database.FirebaseDatabase
-
 
 class DataBase(context: Context?) :
 

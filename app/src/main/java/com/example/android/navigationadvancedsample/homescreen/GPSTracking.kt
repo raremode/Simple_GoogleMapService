@@ -1,4 +1,4 @@
-package com.example.android.navigationadvancedsample
+package com.example.android.navigationadvancedsample.homescreen
 
 import android.Manifest
 import android.content.Context
@@ -10,7 +10,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 
-class GPStracking(  //подключаем менеджер локаций
+class GPSTracking(  //подключаем менеджер локаций
     var context: Context
 ) : LocationListener {
     // проверяем что GPS включен

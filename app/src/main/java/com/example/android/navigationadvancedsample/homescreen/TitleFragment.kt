@@ -1,19 +1,3 @@
-/*
- * Copyright 2019, The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.example.android.navigationadvancedsample.homescreen
 
 import android.Manifest
@@ -25,8 +9,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -84,7 +66,7 @@ class TitleFragment : Fragment() {
     var typeFilter: Int = 1 //1-всё, 2-пластик, 3-стекло, 4-батарейки. По умолчанию включается "1"
 
     var markerDataBase: ArrayList<LatLng> = ArrayList(5)
-    private lateinit var databaseWork: DataBase_work
+    private lateinit var databaseWork: DataBaseWork
     private lateinit var baseJSON: JSONObject
     private lateinit var serverDataBase: ServerDataBase
 
@@ -100,7 +82,7 @@ class TitleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fillMarkerDataBase()
         getLocationPermission()
-        databaseWork = DataBase_work(context)
+        databaseWork = DataBaseWork(context)
         serverDataBase = ServerDataBase(context)
         serverDataBase.loadJSON()
         //  baseJSON = ServerDataBase(context)
