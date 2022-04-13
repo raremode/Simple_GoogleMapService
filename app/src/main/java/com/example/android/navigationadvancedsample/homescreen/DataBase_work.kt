@@ -1,4 +1,4 @@
-package com.example.android.navigationadvancedsample.listscreen
+package com.example.android.navigationadvancedsample.homescreen
 
 import android.content.ContentValues
 import android.content.Context
@@ -9,7 +9,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.Log
-import android.widget.Toast
+import com.example.android.navigationadvancedsample.homescreen.DataBase
 import com.google.android.gms.maps.model.LatLng
 import java.util.ArrayList
 
@@ -25,6 +25,10 @@ class DataBase_work(context: Context?) {
     private var numbertype : Int = 0
     var cursor: Cursor? = null
     var cursor2: Cursor? = null
+
+    fun loadDb(){
+
+    }
 
     fun insert(type : Int?, latitude: Double?, longitude: Double?) { //функция заполнения БД точек сбора мусора
         cv.put(DataBase.TYPEFILTER, type)

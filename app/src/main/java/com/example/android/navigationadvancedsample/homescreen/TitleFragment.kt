@@ -32,7 +32,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.android.navigationadvancedsample.R
-import com.example.android.navigationadvancedsample.listscreen.DataBase_work
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -42,14 +41,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import org.json.JSONObject
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
-import kotlin.concurrent.schedule
-
-
-
 
 
 /**
@@ -85,6 +81,8 @@ class TitleFragment : Fragment() {
 
     var markerDataBase : ArrayList<LatLng> = ArrayList(5)
     private lateinit var databaseWork : DataBase_work
+    private lateinit var baseJSON : JSONObject
+    private lateinit var serverDataBase: ServerDataBase
 
 
     override fun onCreateView(
@@ -102,6 +100,9 @@ class TitleFragment : Fragment() {
         getLocationPermission()
 
         databaseWork = DataBase_work(context)
+        serverDataBase = ServerDataBase(context)
+        serverDataBase.loadJSON()
+      //  baseJSON = ServerDataBase(context)
 
         buttonFilterAll = view.findViewById(R.id.filterAll) as Button
         buttonFilterPlastic = view.findViewById(R.id.filterPlastic) as Button
@@ -282,6 +283,7 @@ class TitleFragment : Fragment() {
                 map?.uiSettings?.isMyLocationButtonEnabled = true
                 map?.uiSettings?.isZoomControlsEnabled = true
                 map?.uiSettings?.isMapToolbarEnabled = false
+                map?.uiSettings?.isCompassEnabled = false
 
                 setDefaultTypeMarkers()
                 setGarbageMarkers()
