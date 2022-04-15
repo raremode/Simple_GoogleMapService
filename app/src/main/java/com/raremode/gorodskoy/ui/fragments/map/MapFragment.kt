@@ -13,26 +13,32 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
+import com.raremode.gorodskoy.AppConfig.APP_TAG
 import com.raremode.gorodskoy.R
-import com.raremode.gorodskoy.dao.DataBaseWork
+import com.raremode.gorodskoy.database.MarkerDao
+import com.raremode.gorodskoy.database.MarkerDatabase
 import com.raremode.gorodskoy.databinding.FragmentMapBinding
+import com.raremode.gorodskoy.extensions.bitmapDescriptorFromVector
 import com.raremode.gorodskoy.models.GarbageTypes
-import com.raremode.gorodskoy.utils.MarkersHandler
+import com.raremode.gorodskoy.ui.fragments.map.adapters.FilterButtonsAdapter
+import com.raremode.gorodskoy.ui.models.FilterButtonModel
 import com.raremode.gorodskoy.utils.JsonAssetsManager
+import com.raremode.gorodskoy.utils.MarkersHandler
+import com.raremode.gorodskoy.utils.PermissionManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
-import kotlin.collections.ArrayList
 
 class MapFragment : Fragment() {
 
@@ -58,12 +64,13 @@ class MapFragment : Fragment() {
     private lateinit var markers: List<Marker>
     private lateinit var markersHandler: MarkersHandler
 
+    private lateinit var dao: MarkerDao
+
     lateinit var myTimer: Timer
     val uiHandler: Handler = Handler()
     var typeFilter: Int = 1 //1-всё, 2-пластик, 3-стекло, 4-батарейки. По умолчанию включается "1"
 
     var markerDataBase: ArrayList<LatLng> = ArrayList(5)
-    private lateinit var databaseWork: DataBaseWork
     private lateinit var baseJSON: JSONObject
     private lateinit var jsonAssetsManager: JsonAssetsManager
 
@@ -77,18 +84,43 @@ class MapFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val permissionManager = PermissionManager(fragment = this)
+        dao = MarkerDatabase.getDatabase(requireContext()).markerDao()
+        permissionManager.requestLocationPermission {
+            when (it) {
+                PermissionManager.ACCESSED_FINE_LOCATION -> Toast.makeText(context, "Fine Location", Toast.LENGTH_SHORT).show()
+                PermissionManager.ACCESSED_COARSE_LOCATION -> Toast.makeText(context, "Coarse Location", Toast.LENGTH_SHORT).show()
+                PermissionManager.DENIED -> Toast.makeText(context, "Denied Location", Toast.LENGTH_SHORT).show()
+            }
+        }
         fillMarkerDataBase()
         getLocationPermission()
-        databaseWork = DataBaseWork(context)
+        setupFilterButtons()
         jsonAssetsManager = JsonAssetsManager(context)
         jsonAssetsManager.parseJsonFromAssets()
-        //  baseJSON = ServerDataBase(context)
-        filterClickListener()
-
-        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(Runnable {
+        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate({
             updateLocation()
             Log.d(TAG, "UpdateLocation: updated well")
         }, 0, 10, TimeUnit.SECONDS) //постоянное обновление местоположения пользователя!
+    }
+
+    private fun setupFilterButtons() {
+        val filterButtonItems = mutableListOf<FilterButtonModel>()
+        filterButtonItems.add(FilterButtonModel("Стекло", GarbageTypes.GLASS, true))
+        filterButtonItems.add(FilterButtonModel("Пластик", GarbageTypes.PLASTIC, false))
+        filterButtonItems.add(FilterButtonModel("Батарейки>", GarbageTypes.BATTERIES, false))
+        filterButtonItems.add(FilterButtonModel("Стекло", GarbageTypes.GLASS, false))
+        filterButtonItems.add(FilterButtonModel("Пластик", GarbageTypes.PLASTIC, false))
+        filterButtonItems.add(FilterButtonModel("Батарейки>", GarbageTypes.BATTERIES, false))
+        filterButtonItems.add(FilterButtonModel("Стекло", GarbageTypes.GLASS, false))
+        filterButtonItems.add(FilterButtonModel("Пластик", GarbageTypes.PLASTIC, false))
+        filterButtonItems.add(FilterButtonModel("Батарейки>", GarbageTypes.BATTERIES, false))
+        val adapter = FilterButtonsAdapter(filterButtonItems)
+        binding.apply {
+            fmRecyclerFilterButtons.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            fmRecyclerFilterButtons.adapter = adapter
+        }
     }
 
     private fun fillMarkerDataBase() {
@@ -101,58 +133,6 @@ class MapFragment : Fragment() {
             markerDataBase.add(LatLng(x, y))
             x += plus
             y += plus
-        }
-    }
-
-    private fun filterClickListener() {
-        binding.apply {
-            filterAll.setOnClickListener {
-                //  buttonFilterAll.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-                filterAll.setBackgroundResource(R.drawable.ovalbuttons_ontap)
-                filterPlastic.setBackgroundResource(R.drawable.ovalbuttons)
-                filterGlass.setBackgroundResource(R.drawable.ovalbuttons)
-                filterBatteries.setBackgroundResource(R.drawable.ovalbuttons)
-                //...
-                typeFilter = 1
-                Log.d(TAG, "Type = " + typeFilter)
-                setGarbageMarkers()
-            }
-
-            filterPlastic.setOnClickListener {
-                //  buttonFilterAll.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-                filterPlastic.setBackgroundResource(R.drawable.ovalbuttons_ontap)
-                filterAll.setBackgroundResource(R.drawable.ovalbuttons)
-                filterGlass.setBackgroundResource(R.drawable.ovalbuttons)
-                filterBatteries.setBackgroundResource(R.drawable.ovalbuttons)
-                //...
-                typeFilter = 2
-                Log.d(TAG, "Type = " + typeFilter)
-                setGarbageMarkers()
-            }
-
-            filterGlass.setOnClickListener {
-                //  buttonFilterAll.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-                filterGlass.setBackgroundResource(R.drawable.ovalbuttons_ontap)
-                filterAll.setBackgroundResource(R.drawable.ovalbuttons)
-                filterPlastic.setBackgroundResource(R.drawable.ovalbuttons)
-                filterBatteries.setBackgroundResource(R.drawable.ovalbuttons)
-                //...
-                typeFilter = 3
-                Log.d(TAG, "Type = " + typeFilter)
-                setGarbageMarkers()
-            }
-
-            filterBatteries.setOnClickListener {
-                //  buttonFilterAll.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-                filterBatteries.setBackgroundResource(R.drawable.ovalbuttons_ontap)
-                filterAll.setBackgroundResource(R.drawable.ovalbuttons)
-                filterPlastic.setBackgroundResource(R.drawable.ovalbuttons)
-                filterGlass.setBackgroundResource(R.drawable.ovalbuttons)
-                //...
-                typeFilter = 4
-                Log.d(TAG, "Type = " + typeFilter)
-                setGarbageMarkers()
-            }
         }
     }
 
@@ -180,7 +160,7 @@ class MapFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    binding.gpsRefresh.setOnClickListener {
+                    binding.fmGpsRefresh.setOnClickListener {
                         val currentLocation = task.result
                         destroyMyselfMarker(prevLocationMarker)
                         setMyselfMarker(currentLocation = currentLocation)
@@ -231,12 +211,13 @@ class MapFragment : Fragment() {
             TAG,
             "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude
         )
-        map!!.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
+        map?.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
     }
 
     private fun initMap() {
         Log.d(TAG, "initMap: initializing map")
-        mapFragment = childFragmentManager.findFragmentById(R.id.mapsee) as SupportMapFragment
+        mapFragment =
+            childFragmentManager.findFragmentById(R.id.fmMapContainer) as SupportMapFragment
         mapFragment.getMapAsync { googleMap ->
             Log.d(TAG, "initMap: initializing map")
             Toast.makeText(context, "Map is ready", Toast.LENGTH_SHORT).show()
@@ -256,11 +237,9 @@ class MapFragment : Fragment() {
                 )
                     map?.isMyLocationEnabled = true
                 map?.uiSettings?.isMyLocationButtonEnabled = true
-                map?.uiSettings?.isZoomControlsEnabled = true
+                map?.uiSettings?.isZoomControlsEnabled = false
                 map?.uiSettings?.isMapToolbarEnabled = false
                 map?.uiSettings?.isCompassEnabled = false
-
-                setDefaultTypeMarkers()
                 setGarbageMarkers()
             }
         }
@@ -274,10 +253,8 @@ class MapFragment : Fragment() {
         //     moveCamera(CameraUpdateFactory.newLatLng(myLocationMarker))
         //}
         val options: MarkerOptions =
-            MarkerOptions().position(myLocationMarker).title("Ваше местоположение").icon(
-                BitmapDescriptorFactory.fromResource(
-                    R.drawable.marker
-                )
+            MarkerOptions().position(myLocationMarker).title("Ваше местоположение")
+                .icon(context?.bitmapDescriptorFromVector(R.drawable.ic_map_marker)
             )
         myMarker = map?.addMarker(options)!!
 
@@ -287,172 +264,20 @@ class MapFragment : Fragment() {
         myMarker.remove()
     }
 
-    private fun setDefaultTypeMarkers() {
-        binding.apply {
-            filterAll.setBackgroundResource(R.drawable.ovalbuttons_ontap)
-            filterPlastic.setBackgroundResource(R.drawable.ovalbuttons)
-            filterGlass.setBackgroundResource(R.drawable.ovalbuttons)
-            filterBatteries.setBackgroundResource(R.drawable.ovalbuttons)
-        }
-        //...
-        typeFilter = 1
-        Log.d(TAG, "Type = " + typeFilter)
-    }
-
     private fun setGarbageMarkers() {
         val plastic = LatLng(47.205242, 38.909498)
         val steklo = LatLng(47.206616, 38.904884)
         val batareika = LatLng(47.208862, 38.910366)
         val markers = jsonAssetsManager.getMarkers()
-        markersHandler.setGarbageMarkers(markers)
-        binding.filterPlastic.setOnClickListener {
-            map?.clear()
-            val plasticMarkers = markers?.filter { it.garbageType == GarbageTypes.PLASTIC.type }
-            markersHandler.setGarbageMarkers(plasticMarkers ?: emptyList())
+        if (markers != null) {
+            CoroutineScope(Dispatchers.IO).launch {
+                dao.addMarkers(markers)
+            }
         }
-//        when (typeFilter) {
-//            1 -> {
-//                map?.clear()
-//                getDeviceLocation()
-//
-//                /* for (i in 0..5){
-//                    map?.addMarker(
-//                        MarkerOptions()
-//                            .position(markerDataBase[i])
-//                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
-//                } */ //тест малого массива точек на карту
-//                var locationLength: Int = databaseWork.get_value()
-//                Log.d(TAG, "length of database=" + locationLength)
-//                if (locationLength != 0) {
-//
-//                    var locationList: ArrayList<LatLng> = databaseWork.getGarbageLocations(0)
-//                    var locationType: ArrayList<Int> = databaseWork.getGarbageTypes()
-//                    Log.d(TAG, "getDataBaseInfo: getting was successfully!")
-//
-//                    for (i in 0 until (locationType.size)) {
-//                        when (locationType[i]) {
-//                            1 -> {
-//                                map?.addMarker(
-//                                    MarkerOptions()
-//                                        .position(locationList[i])
-//                                        .icon(
-//                                            BitmapDescriptorFactory.defaultMarker(
-//                                                BitmapDescriptorFactory.HUE_RED
-//                                            )
-//                                        )
-//                                )
-//                            }
-//                            2 -> {
-//                                map?.addMarker(
-//                                    MarkerOptions()
-//                                        .position(locationList[i])
-//                                        .icon(
-//                                            BitmapDescriptorFactory.defaultMarker(
-//                                                BitmapDescriptorFactory.HUE_ORANGE
-//                                            )
-//                                        )
-//                                )
-//                            }
-//                            3 -> {
-//                                map?.addMarker(
-//                                    MarkerOptions()
-//                                        .position(locationList[i])
-//                                        .icon(
-//                                            BitmapDescriptorFactory.defaultMarker(
-//                                                BitmapDescriptorFactory.HUE_GREEN
-//                                            )
-//                                        )
-//                                )
-//                            }
-//                        }
-//                    }
-//                }
-//
-//
-//            }
-//            2 -> { //eto plastic
-//                map?.clear()
-//                getDeviceLocation()
-//
-//                var locationLength: Int = databaseWork.get_value()
-//                Log.d(TAG, "length of database=" + locationLength)
-//                if (locationLength != 0) {
-//
-//                    var locationList: ArrayList<LatLng> = databaseWork.getGarbageLocations(1)
-//
-//                    for (i in 0 until (locationList.size)) {
-//
-//                        map?.addMarker(
-//                            MarkerOptions()
-//                                .position(locationList[i])
-//                                .icon(
-//                                    BitmapDescriptorFactory.defaultMarker(
-//                                        BitmapDescriptorFactory.HUE_RED
-//                                    )
-//                                )
-//                        )
-//
-//                    }
-//
-//                    Log.d(TAG, "getDataBaseInfo: getting was successfully!")
-//                }
-//
-//            }
-//            3 -> { //eto steklo
-//                map?.clear()
-//                getDeviceLocation()
-//
-//                var locationLength: Int = databaseWork.get_value()
-//                Log.d(TAG, "length of database=" + locationLength)
-//                if (locationLength != 0) {
-//
-//                    var locationList: ArrayList<LatLng> = databaseWork.getGarbageLocations(2)
-//
-//                    for (i in 0 until (locationList.size)) {
-//
-//                        map?.addMarker(
-//                            MarkerOptions()
-//                                .position(locationList[i])
-//                                .icon(
-//                                    BitmapDescriptorFactory.defaultMarker(
-//                                        BitmapDescriptorFactory.HUE_ORANGE
-//                                    )
-//                                )
-//                        )
-//
-//                    }
-//
-//                    Log.d(TAG, "getDataBaseInfo: getting was successfully!")
-//                }
-//            }
-//            4 -> {
-//                map?.clear()
-//                getDeviceLocation()
-//
-//                var locationLength: Int = databaseWork.get_value()
-//                Log.d(TAG, "length of database=" + locationLength)
-//                if (locationLength != 0) {
-//
-//                    var locationList: ArrayList<LatLng> = databaseWork.getGarbageLocations(3)
-//
-//                    for (i in 0 until (locationList.size)) {
-//
-//                        map?.addMarker(
-//                            MarkerOptions()
-//                                .position(locationList[i])
-//                                .icon(
-//                                    BitmapDescriptorFactory.defaultMarker(
-//                                        BitmapDescriptorFactory.HUE_GREEN
-//                                    )
-//                                )
-//                        )
-//
-//                    }
-//
-//                    Log.d(TAG, "getDataBaseInfo: getting was successfully!")
-//                }
-//            }
-//        }
+        CoroutineScope(Dispatchers.IO).launch {
+            val sd = dao.getAllMarkers()
+            Log.d(APP_TAG, sd.size.toString())
+        }
     }
 
     private fun getLocationPermission() {
