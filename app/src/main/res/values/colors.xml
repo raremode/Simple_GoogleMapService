@@ -25,4 +25,5 @@
     <color name="colorTap">#000000</color>
     <color name="colorNavigation">#FAFCEE</color>
     <color name="colorButtons">#DBEA8D</color>
+    <color name="colorBackground">#E9F1BE</color>
 </resources>

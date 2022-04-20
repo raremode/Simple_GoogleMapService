@@ -5,8 +5,8 @@
       "name": "Place0",
       "garbageType": "Plastic",
       "coordinates": {
-        "latitude": "39.02",
-        "longitude": "40.27"
+        "latitude": "47.204630",
+        "longitude": "38.936362"
       }
     },
 
@@ -15,8 +15,8 @@
       "name": "Place1",
       "garbageType": "Glass",
       "coordinates": {
-        "latitude": "39.22",
-        "longitude": "40.17"
+        "latitude": "47.205137",
+        "longitude": "38.905731"
       }
     },
 
@@ -25,8 +25,8 @@
       "name": "Place2",
       "garbageType": "Batteries",
       "coordinates": {
-        "latitude": "39.42",
-        "longitude": "40.07"
+        "latitude": "47.204880",
+        "longitude": "38.896367"
       }
     }
   ]
