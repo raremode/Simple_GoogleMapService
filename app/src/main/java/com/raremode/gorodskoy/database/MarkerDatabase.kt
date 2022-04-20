@@ -5,9 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.raremode.gorodskoy.models.Marker
+import com.raremode.gorodskoy.models.MarkerLocation
 
-@Database(entities = [Marker::class], version = 1, exportSchema = false)
+@Database(entities = [MarkerLocation::class], version = 1, exportSchema = false)
 @TypeConverters(MarkerTypeConverter::class)
 abstract class MarkerDatabase : RoomDatabase() {
 

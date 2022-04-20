@@ -5,7 +5,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.raremode.gorodskoy.AppConfig.APP_TAG
 import com.raremode.gorodskoy.AppConfig.Assets.JSON_ASSETS_FILE_NAME
-import com.raremode.gorodskoy.models.Marker
+import com.raremode.gorodskoy.models.MarkerLocation
 import com.raremode.gorodskoy.models.RootModel
 
 class JsonAssetsManager(private val context: Context?) {
@@ -22,5 +22,5 @@ class JsonAssetsManager(private val context: Context?) {
         }
     }
 
-    fun getMarkers(): List<Marker>? = rootModel?.markers
+    fun getMarkers(): List<MarkerLocation>? = rootModel?.markers
 }

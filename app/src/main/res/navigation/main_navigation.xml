@@ -21,10 +21,19 @@
         android:id="@+id/navigation_news"
         android:name="com.raremode.gorodskoy.ui.fragments.news.NewsFragment"
         android:label="@string/title_news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news">
+        <action
+            android:id="@+id/action_navigation_news_to_newsOpenedFragment"
+            app:destination="@id/newsOpenedFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_account"
         android:name="com.raremode.gorodskoy.ui.fragments.account.AccountFragment"
         android:label="AccountFragment"
-        tools:layout="@layout/fragment_account"/>
+        tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/newsOpenedFragment"
+        android:name="com.raremode.gorodskoy.ui.fragments.newsopened.NewsOpenedFragment"
+        android:label="fragment_news_opened"
+        tools:layout="@layout/fragment_news_opened" />
 </navigation>

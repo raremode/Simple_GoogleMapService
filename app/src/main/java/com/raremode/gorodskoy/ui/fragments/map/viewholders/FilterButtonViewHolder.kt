@@ -9,6 +9,8 @@ import com.raremode.gorodskoy.ui.models.FilterButtonModel
 class FilterButtonViewHolder(private val binding: ItemFilterButtonBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
+    var clickCallback: ((filterButtonModel: FilterButtonModel) -> Unit)? = null
+
         fun bind(button: FilterButtonModel, size: Int) {
             binding.ifbTextView.text = button.text
             when (adapterPosition) {
@@ -20,6 +22,9 @@ class FilterButtonViewHolder(private val binding: ItemFilterButtonBinding) :
                     marginEnd = itemView.context.dpsToIntPixels(16F)
                     marginStart = itemView.context.dpsToIntPixels(6F)
                 }
+            }
+            itemView.setOnClickListener {
+                clickCallback?.invoke(button)
             }
         }
 }

@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.raremode.gorodskoy.R
 import com.raremode.gorodskoy.databinding.FragmentNewsBinding
-import com.raremode.gorodskoy.ui.fragments.map.adapters.NewsItemsAdapter
+import com.raremode.gorodskoy.ui.fragments.news.adapters.NewsItemsAdapter
+import com.raremode.gorodskoy.ui.fragments.newsopened.NewsOpenedFragment
 import com.raremode.gorodskoy.ui.models.NewsItemsModel
 
 
@@ -46,13 +49,20 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        for (i in 0 until 6) {
-            val title = titles[i]
-            val newsItem = NewsItemsModel(title = title)
-            newsItemsList.add(newsItem)
+        titles.forEach { title ->
+            newsItemsList.add(
+                NewsItemsModel(title)
+            )
         }
-        adapter = NewsItemsAdapter(this, newsItemsList, requireContext())
+        adapter = NewsItemsAdapter(newsItemsList)
+        adapter.clickCallback = { position ->
+            val bundle = Bundle()
+            bundle.putInt(NewsOpenedFragment.NEWS_ADAPTER_POSITION, position)
+            findNavController().navigate(
+                R.id.action_navigation_news_to_newsOpenedFragment,
+                args = bundle
+            )
+        }
         binding.newsItemsRV.adapter = adapter
         binding.newsItemsRV.layoutManager = LinearLayoutManager(context)
 

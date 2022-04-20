@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "marker_table")
-data class Marker(
+data class MarkerLocation(
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null,
     val name: String? = null,

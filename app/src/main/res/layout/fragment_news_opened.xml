@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_news_opened">
+    tools:context=".ui.fragments.newsopened.NewsOpenedFragment">
 
-<WebView
-android:id="@+id/webPage"
-android:layout_width="match_parent"
-android:layout_height="match_parent" />
+    <WebView
+        android:id="@+id/webPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    </LinearLayout>
+</LinearLayout>

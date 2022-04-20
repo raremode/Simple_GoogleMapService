@@ -10,6 +10,7 @@ import com.raremode.gorodskoy.ui.models.FilterButtonModel
 class FilterButtonsAdapter(private val items: List<FilterButtonModel>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    var clickCallback: ((filterButtonModel: FilterButtonModel) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return FilterButtonViewHolder(
@@ -20,6 +21,7 @@ class FilterButtonsAdapter(private val items: List<FilterButtonModel>) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is FilterButtonViewHolder) {
             holder.bind(items[position], items.size)
+            holder.clickCallback = clickCallback
         }
     }
 
