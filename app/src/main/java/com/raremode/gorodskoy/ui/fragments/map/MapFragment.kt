@@ -106,21 +106,22 @@ class MapFragment : Fragment() {
 
     private fun setupFilterButtons() {
         val filterButtonItems = mutableListOf<FilterButtonModel>()
-        filterButtonItems.add(FilterButtonModel("Стекло", GarbageTypes.GLASS, true))
+        filterButtonItems.add(FilterButtonModel("Всё", GarbageTypes.GLASS, true))
         filterButtonItems.add(FilterButtonModel("Пластик", GarbageTypes.PLASTIC, false))
-        filterButtonItems.add(FilterButtonModel("Батарейки>", GarbageTypes.BATTERIES, false))
+        filterButtonItems.add(FilterButtonModel("Батарейки", GarbageTypes.BATTERIES, false))
+        filterButtonItems.add(FilterButtonModel("Бумага", GarbageTypes.GLASS, false))
+        filterButtonItems.add(FilterButtonModel("Пластик", GarbageTypes.PLASTIC, false))
+        filterButtonItems.add(FilterButtonModel("Батарейки", GarbageTypes.BATTERIES, false))
         filterButtonItems.add(FilterButtonModel("Стекло", GarbageTypes.GLASS, false))
         filterButtonItems.add(FilterButtonModel("Пластик", GarbageTypes.PLASTIC, false))
-        filterButtonItems.add(FilterButtonModel("Батарейки>", GarbageTypes.BATTERIES, false))
-        filterButtonItems.add(FilterButtonModel("Стекло", GarbageTypes.GLASS, false))
-        filterButtonItems.add(FilterButtonModel("Пластик", GarbageTypes.PLASTIC, false))
-        filterButtonItems.add(FilterButtonModel("Батарейки>", GarbageTypes.BATTERIES, false))
+        filterButtonItems.add(FilterButtonModel("Батарейки", GarbageTypes.BATTERIES, false))
         val adapter = FilterButtonsAdapter(filterButtonItems)
         binding.apply {
             fmRecyclerFilterButtons.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             fmRecyclerFilterButtons.adapter = adapter
         }
+
     }
 
     private fun fillMarkerDataBase() {
@@ -268,16 +269,11 @@ class MapFragment : Fragment() {
         val plastic = LatLng(47.205242, 38.909498)
         val steklo = LatLng(47.206616, 38.904884)
         val batareika = LatLng(47.208862, 38.910366)
-        val markers = jsonAssetsManager.getMarkers()
-        if (markers != null) {
-            CoroutineScope(Dispatchers.IO).launch {
-                dao.addMarkers(markers)
-            }
-        }
-        CoroutineScope(Dispatchers.IO).launch {
-            val sd = dao.getAllMarkers()
-            Log.d(APP_TAG, sd.size.toString())
-        }
+
+binding.fmRecyclerFilterButtons.setOnClickListener {
+
+}
+
     }
 
     private fun getLocationPermission() {

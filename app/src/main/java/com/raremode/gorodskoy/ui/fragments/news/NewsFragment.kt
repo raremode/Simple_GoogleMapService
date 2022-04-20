@@ -47,10 +47,11 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val title = ""
-        val newsItem = NewsItemsModel(title = title)
-        newsItemsList.add(newsItem)
-
+        for (i in 0 until 6) {
+            val title = titles[i]
+            val newsItem = NewsItemsModel(title = title)
+            newsItemsList.add(newsItem)
+        }
         adapter = NewsItemsAdapter(this, newsItemsList, requireContext())
         binding.newsItemsRV.adapter = adapter
         binding.newsItemsRV.layoutManager = LinearLayoutManager(context)
