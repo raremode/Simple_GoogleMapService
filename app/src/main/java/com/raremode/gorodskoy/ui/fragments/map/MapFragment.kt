@@ -44,7 +44,7 @@ class MapFragment : Fragment() {
     private val FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION
     private val COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION
     private val LOCATION_PERMISSION_REQUEST_CODE = 1234
-    private val DEFAULT_ZOOM = 14f
+    private val DEFAULT_ZOOM = 15f
 
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
@@ -93,7 +93,6 @@ class MapFragment : Fragment() {
                 ).show()
             }
         }
-        fillMarkerDataBase()
         getLocationPermission()
         setupFilterButtons()
         jsonAssetsManager = JsonAssetsManager(context)
@@ -101,7 +100,12 @@ class MapFragment : Fragment() {
         Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate({
             updateLocation()
             Log.d(TAG, "UpdateLocation: updated well")
-        }, 0, 10, TimeUnit.SECONDS) //постоянное обновление местоположения пользователя!
+        }, 0, 2, TimeUnit.SECONDS) //постоянное обновление местоположения пользователя!
+
+        Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate({
+            map?.clear()
+            Log.d(TAG, "ClearCache: cleared well")
+        }, 0, 30, TimeUnit.SECONDS) // очистка кеша карты
     }
 
     private fun setupFilterButtons() {
@@ -120,18 +124,6 @@ class MapFragment : Fragment() {
             fmRecyclerFilterButtons.adapter = adapter
         }
 
-    }
-
-    private fun fillMarkerDataBase() {
-        var x: Double = 47.2
-        var y: Double = 38.9
-        var plus: Double = 0.005
-        for (i in 0..5) {
-            //  var newlatlng : LatLng = LatLng(x, y)
-            // markerDataBase[i]= LatLng(x, y)
-            x += plus
-            y += plus
-        }
     }
 
     private fun getDeviceLocation() {
@@ -245,6 +237,7 @@ class MapFragment : Fragment() {
                 map?.uiSettings?.isMapToolbarEnabled = false
                 map?.uiSettings?.isCompassEnabled = false
                 getGarbageMarkers()
+                map?.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.mapstyle))
             }
         }
     }
@@ -261,7 +254,10 @@ class MapFragment : Fragment() {
                 .icon(
                     context?.bitmapDescriptorFromVector(R.drawable.ic_map_marker)
                 )
-//        myMarker = map?.addMarker(options)!!
+                //        myMarker = map?.addMarker(options)!!
+map?.apply {
+    addMarker(MarkerOptions().position(myLocationMarker).icon(context?.bitmapDescriptorFromVector(R.drawable.ic_map_marker)))
+}
 
     }
 

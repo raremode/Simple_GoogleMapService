@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,12 +17,12 @@ import com.raremode.gorodskoy.ui.models.NewsItemsModel
 class NewsFragment : Fragment() {
 
     private val titles = arrayOf(
-        "  О погоде",
-        "  Проблемы экологии",
-        "  Ситуация в России",
-        "  Ситуация в мире",
-        "  Ситуация по области",
-        "  Ситуация в городе"
+        "  Вторую площадку для раздельного сбора мусора установили в Таганроге",
+        "  Программа раздельного сбора мусора в городе Таганрог",
+        "  В Таганроге появились новые специальные контейнеры для сбора пластика",
+        "  Как правильно сортировать отходы для переработки?",
+        "  Как организовать раздельный сбор мусора у себя дома?",
+        //"  Ситуация в городе"
     )
 
     private var _binding: FragmentNewsBinding? = null
@@ -68,8 +66,14 @@ class NewsFragment : Fragment() {
 
     }
 
+    fun clearData() {
+        newsItemsList.clear() // чистка листа
+        adapter.notifyDataSetChanged() // даем об этом знать адаптеру
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        clearData()
         _binding = null
     }
 }

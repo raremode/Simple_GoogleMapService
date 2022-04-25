@@ -23,8 +23,8 @@ class MarkersHandler(
                 )
             val iconColor = when (marker.garbageType) {
                 GarbageTypes.GLASS.type -> BitmapDescriptorFactory.HUE_RED
-                GarbageTypes.BATTERIES.type -> BitmapDescriptorFactory.HUE_ORANGE
-                GarbageTypes.PLASTIC.type -> BitmapDescriptorFactory.HUE_GREEN
+                GarbageTypes.BATTERIES.type -> BitmapDescriptorFactory.HUE_GREEN
+                GarbageTypes.PLASTIC.type -> BitmapDescriptorFactory.HUE_YELLOW
                 else -> { BitmapDescriptorFactory.HUE_MAGENTA }
             }
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(iconColor))

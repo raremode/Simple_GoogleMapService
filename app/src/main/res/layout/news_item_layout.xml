@@ -14,13 +14,16 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/news_item_background"
-        android:fontFamily="@font/roboto_light"
+        android:fontFamily="@font/roboto_medium"
         android:text="TextView"
+        android:background="@drawable/news_item_background"
         android:textColor="@color/white"
         android:textSize="20sp"
+        android:textAlignment="center"
+        android:textScaleX="0.93"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
