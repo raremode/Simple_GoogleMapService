@@ -26,4 +26,6 @@
     <color name="colorNavigation">#FAFCEE</color>
     <color name="colorButtons">#DBEA8D</color>
     <color name="colorBackground">#E9F1BE</color>
+    <color name="colorSea">#57b6ff</color>
+    <color name="colorAccount">#5BA501</color>
 </resources>

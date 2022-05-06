@@ -30,10 +30,23 @@
         android:id="@+id/navigation_account"
         android:name="com.raremode.gorodskoy.ui.fragments.account.AccountFragment"
         android:label="AccountFragment"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_navigation_account_to_accountLoginFragment"
+            app:destination="@id/accountLoginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newsOpenedFragment"
         android:name="com.raremode.gorodskoy.ui.fragments.newsopened.NewsOpenedFragment"
         android:label="fragment_news_opened"
         tools:layout="@layout/fragment_news_opened" />
+    <fragment
+        android:id="@+id/accountLoginFragment"
+        android:name="com.raremode.gorodskoy.ui.login.AccountLoginFragment"
+        android:label="fragment_account_login"
+        tools:layout="@layout/fragment_account_login" >
+        <action
+            android:id="@+id/action_accountLoginFragment_to_navigation_account"
+            app:destination="@id/navigation_account" />
+    </fragment>
 </navigation>

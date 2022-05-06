@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "255604785881",
+    "project_id": "gorodskoy-f2a2a",
+    "storage_bucket": "gorodskoy-f2a2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:255604785881:android:51dc60d246428fcd41b4c8",
+        "android_client_info": {
+          "package_name": "com.raremode.gorodskoy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "255604785881-g3r9tpajvbceu1abhufkp3s24nin62pe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEpka9jf6H1IKSWU0QRMldJWlthmrGH20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "255604785881-g3r9tpajvbceu1abhufkp3s24nin62pe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

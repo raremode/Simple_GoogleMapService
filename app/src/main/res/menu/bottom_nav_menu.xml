@@ -6,10 +6,6 @@
         android:icon="@drawable/ic_menu_map"
         android:title="@string/title_map" />
 
-    <item
-        android:id="@+id/navigation_settings"
-        android:icon="@drawable/ic_menu_settings"
-        android:title="@string/title_settings" />
 
     <item
         android:id="@+id/navigation_news"
