@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorNavigation"
-    tools:context=".ui.fragments.account.login.AccountLoginFragment">
+    tools:context=".ui.fragments.account.register.AccountRegisterFragment">
 
     <ImageView
         android:id="@+id/imageView5"
@@ -18,30 +18,32 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/new_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="248dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/button_press"
         android:fontFamily="@font/roboto_bold"
         android:hint="   Почта"
+
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
-
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.353" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/new_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="432dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/button_press"
         android:fontFamily="@font/roboto_bold"
         android:hint="   Пароль"
@@ -49,53 +51,53 @@
         android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/confirm_new_password"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
-        app:layout_constraintVertical_bias="0.02" />
+        app:layout_constraintTop_toBottomOf="@+id/new_username" />
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/confirm_new_password"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginEnd="48dp"
-        android:width="260dp"
-        android:height="44dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/button_press"
-        android:enabled="true"
         android:fontFamily="@font/roboto_bold"
-        android:text="@string/action_sign_in"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="   Повторить пароль"
+        android:imeActionLabel="@string/action_sign_in_short"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginEnd="48dp"
-        android:width="260dp"
-        android:height="44dp"
-        android:background="@drawable/button_press"
-        android:enabled="true"
-        android:fontFamily="@font/roboto_bold"
-        android:text="@string/action_go_to_register"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.811" />
+        app:layout_constraintVertical_bias="0.631" />
+
+    <Button
+        android:id="@+id/sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="48dp"
+        android:width="260dp"
+        android:height="44dp"
+        android:background="@drawable/button_press"
+        android:enabled="true"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/action_sign_in_short"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.753" />
 
     <ProgressBar
         android:id="@+id/loading"
@@ -104,13 +106,10 @@
         android:layout_gravity="center"
         android:layout_marginStart="32dp"
         android:layout_marginTop="70dp"
-        android:layout_marginEnd="32dp"
         android:layout_marginBottom="64dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/password"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.682" />
 
@@ -120,71 +119,41 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:fontFamily="@font/roboto_bold"
-        android:text="Авторизация"
+        android:text="Регистрация"
         android:textColor="@color/black"
         android:textSize="36dp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="147dp"
+        android:layout_marginTop="128dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Войдите, чтобы получить возможность отмечать избранные пункты сбора отходов на карте!"
+        android:text="Зарегистрируйте себе аккаунт, чтобы получить возможность отмечать избранные пункты сбора отходов на карте!"
+        app:layout_constraintBottom_toTopOf="@+id/new_username"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="48dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Ещё нет аккаунта?"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/register"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login" />
-
-    <Button
-        android:id="@+id/forgot_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="45dp"
-        android:background="@android:color/transparent"
-        android:backgroundTintMode="add"
-        android:fontFamily="@font/roboto_medium"
-        android:stateListAnimator="@null"
-        android:text="Забыли пароль?"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/backtoAccountFragment"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:id="@+id/backtoAccountLoginFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:background="@android:color/transparent"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         android:src="@android:drawable/ic_menu_revert"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

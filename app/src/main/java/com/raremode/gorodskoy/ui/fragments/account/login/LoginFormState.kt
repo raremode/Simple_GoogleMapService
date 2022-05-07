@@ -1,4 +1,4 @@
-package com.raremode.gorodskoy.ui.login
+package com.raremode.gorodskoy.ui.fragments.account.login
 
 /**
  * Data validation state of the login form.

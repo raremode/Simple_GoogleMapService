@@ -42,11 +42,38 @@
         tools:layout="@layout/fragment_news_opened" />
     <fragment
         android:id="@+id/accountLoginFragment"
-        android:name="com.raremode.gorodskoy.ui.login.AccountLoginFragment"
+        android:name="com.raremode.gorodskoy.ui.fragments.account.login.AccountLoginFragment"
         android:label="fragment_account_login"
         tools:layout="@layout/fragment_account_login" >
         <action
             android:id="@+id/action_accountLoginFragment_to_navigation_account"
             app:destination="@id/navigation_account" />
+        <action
+            android:id="@+id/action_accountLoginFragment_to_accountRegisterFragment"
+            app:destination="@id/accountRegisterFragment" />
+        <action
+            android:id="@+id/action_accountLoginFragment_self"
+            app:destination="@id/accountLoginFragment" />
+        <action
+            android:id="@+id/action_accountLoginFragment_to_accountRecoveryFragment"
+            app:destination="@id/accountRecoveryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountRegisterFragment"
+        android:name="com.raremode.gorodskoy.ui.fragments.account.register.AccountRegisterFragment"
+        android:label="fragment_account_register"
+        tools:layout="@layout/fragment_account_register" >
+        <action
+            android:id="@+id/action_accountRegisterFragment_to_accountLoginFragment"
+            app:destination="@id/accountLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountRecoveryFragment"
+        android:name="com.raremode.gorodskoy.ui.fragments.account.recovery.AccountRecoveryFragment"
+        android:label="fragment_account_recovery"
+        tools:layout="@layout/fragment_account_recovery" >
+        <action
+            android:id="@+id/action_accountRecoveryFragment_to_accountLoginFragment"
+            app:destination="@id/accountLoginFragment" />
     </fragment>
 </navigation>

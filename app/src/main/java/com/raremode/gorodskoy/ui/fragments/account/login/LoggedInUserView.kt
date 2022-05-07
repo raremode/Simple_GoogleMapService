@@ -1,4 +1,4 @@
-package com.raremode.gorodskoy.ui.login
+package com.raremode.gorodskoy.ui.fragments.account.login
 
 /**
  * User details post authentication that is exposed to the UI
