@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -62,6 +63,8 @@ class MapFragment : Fragment() {
     private lateinit var jsonAssetsManager: JsonAssetsManager
     private var markers: List<MarkerLocation>? = null
 
+    private val mapViewModel: MapViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -109,21 +112,18 @@ class MapFragment : Fragment() {
     }
 
     private fun setupFilterButtons() {
-        val filterButtonItems = mutableListOf<FilterButtonModel>()
-        filterButtonItems.add(FilterButtonModel("Всё", GarbageTypes.All, true))
-        filterButtonItems.add(FilterButtonModel("Пластик", GarbageTypes.PLASTIC, false))
-        filterButtonItems.add(FilterButtonModel("Батарейки", GarbageTypes.BATTERIES, false))
-        filterButtonItems.add(FilterButtonModel("Стекло", GarbageTypes.GLASS, false))
-        val adapter = FilterButtonsAdapter(filterButtonItems)
+        val adapter = FilterButtonsAdapter()
         adapter.clickCallback = { filterButtonModel ->
-            setGarbageMarkers(filterButtonModel.type)
+            mapViewModel.setGarbageMarkers(filterButtonModel.type)
         }
         binding.apply {
             fmRecyclerFilterButtons.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             fmRecyclerFilterButtons.adapter = adapter
         }
-
+        mapViewModel.filterButtons.observe(viewLifecycleOwner) { filterButtons ->
+            adapter.setItems(filterButtons)
+        }
     }
 
     private fun getDeviceLocation() {
@@ -219,6 +219,10 @@ class MapFragment : Fragment() {
             Toast.makeText(context, "Map is ready", Toast.LENGTH_SHORT).show()
             Log.d(TAG, "onMapReady: map is ready")
             markersHandler = MarkersHandler(googleMap)
+            mapViewModel.markers.observe(viewLifecycleOwner) { markers ->
+                map?.clear()
+                markersHandler.setGarbageMarkers(markers)
+            }
             map = googleMap
             if (locationPermissionsGranted) {
                 getDeviceLocation()
@@ -265,17 +269,6 @@ map?.apply {
         if (::myMarker.isInitialized) {
             myMarker.remove()
         }
-    }
-
-    private fun setGarbageMarkers(type: GarbageTypes) {
-        val mrk = when (type) {
-            GarbageTypes.BATTERIES -> markers?.filter { it.garbageType == GarbageTypes.BATTERIES.type }
-            GarbageTypes.GLASS -> markers?.filter { it.garbageType == GarbageTypes.GLASS.type }
-            GarbageTypes.PLASTIC -> markers?.filter { it.garbageType == GarbageTypes.PLASTIC.type }
-            else -> markers
-        }
-        map?.clear()
-        markersHandler.setGarbageMarkers(mrk)
     }
 
     private fun getGarbageMarkers() {

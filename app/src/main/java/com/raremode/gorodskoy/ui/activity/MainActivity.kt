@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.raremode.gorodskoy.R
 import com.raremode.gorodskoy.databinding.ActivityMainBinding
 
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavGraph() {
+        val auth = Firebase.auth
         navController.setGraph(R.navigation.main_navigation)
     }
 

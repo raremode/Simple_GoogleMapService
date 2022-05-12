@@ -1,5 +1,6 @@
 package com.raremode.gorodskoy.ui.fragments.map.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,8 +8,16 @@ import com.raremode.gorodskoy.databinding.ItemFilterButtonBinding
 import com.raremode.gorodskoy.ui.fragments.map.viewholders.FilterButtonViewHolder
 import com.raremode.gorodskoy.ui.models.FilterButtonModel
 
-class FilterButtonsAdapter(private val items: List<FilterButtonModel>) :
+class FilterButtonsAdapter() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private lateinit var items: List<FilterButtonModel>
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setItems(items: List<FilterButtonModel>) {
+        this.items = items
+        notifyDataSetChanged()
+    }
 
     var clickCallback: ((filterButtonModel: FilterButtonModel) -> Unit)? = null
 

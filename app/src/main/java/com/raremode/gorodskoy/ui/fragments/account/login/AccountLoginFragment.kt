@@ -22,6 +22,7 @@ class AccountLoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
     private var _binding: FragmentAccountLoginBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -32,8 +33,8 @@ class AccountLoginFragment : Fragment() {
     private var MAuth: FirebaseAuth? = null
     private val TAG = "AccountLoginFragment"
 
-    lateinit var email:String
-    lateinit var password:String
+    lateinit var email: String
+    lateinit var password: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,47 +75,47 @@ class AccountLoginFragment : Fragment() {
         mDatabaseReference = mDatabase!!.reference!!.child("Users")
         MAuth = FirebaseAuth.getInstance()
 
-loginButton.setOnClickListener {
+        loginButton.setOnClickListener {
 
-    email = usernameEditText.text.toString()
-    password = passwordEditText.text.toString()
+            email = usernameEditText.text.toString()
+            password = passwordEditText.text.toString()
 
-    if (TextUtils.isEmpty(email)) {
-        Toast.makeText(context, "Неверный формат почты", Toast.LENGTH_SHORT).show()
-    } else if (TextUtils.isEmpty(password)) {
-        Toast.makeText(context, "Неверный формат пароля", Toast.LENGTH_SHORT).show()
-    } else {
-        MAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener(
-            OnCompleteListener<AuthResult?> { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(
-                        context,
-                        "Вы успешно вошли в аккаунт!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(context, "Неверный формат почты", Toast.LENGTH_SHORT).show()
+            } else if (TextUtils.isEmpty(password)) {
+                Toast.makeText(context, "Неверный формат пароля", Toast.LENGTH_SHORT).show()
+            } else {
+                MAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            context,
+                            "Вы успешно вошли в аккаунт!",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
 
-                    val loginedBundle = Bundle()
-                    loginedBundle.putString(AccountFragment.NAME_STRING, email)
-                    loginedBundle.putString(AccountFragment.MAIL, email)
-                    loginedBundle.putString(AccountFragment.PASS, password)
-findNavController().navigate(R.id.action_accountLoginFragment_to_navigation_account, args = loginedBundle)
+                        val loginedBundle = Bundle()
+                        loginedBundle.putString(AccountFragment.NAME_STRING, email)
+                        loginedBundle.putString(AccountFragment.MAIL, email)
+                        loginedBundle.putString(AccountFragment.PASS, password)
+                        findNavController().navigate(
+                            R.id.action_accountLoginFragment_to_navigation_account,
+                            args = loginedBundle
+                        )
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Ошибка входа: " + task.exception!!.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        Log.d(TAG, " |$email| " + task.exception!!.message)
+                    }
                 }
-                else {
-                    Toast.makeText(
-                        context,
-                        "Ошибка входа: " + task.exception!!.message,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    Log.d(TAG, " |$email| " + task.exception!!.message)
-                }
-            })
-    }
-}
-
-
+            }
         }
 
+
+    }
 
 
     override fun onDestroyView() {
