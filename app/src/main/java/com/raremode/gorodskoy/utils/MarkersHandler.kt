@@ -1,6 +1,5 @@
 package com.raremode.gorodskoy.utils
 
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -8,11 +7,10 @@ import com.raremode.gorodskoy.models.GarbageTypes
 import com.raremode.gorodskoy.models.MarkerLocation
 
 
-class MarkersHandler(
-    private val googleMap: GoogleMap
-) {
+class MarkersHandler {
 
-    fun setGarbageMarkers(markerLocations: List<MarkerLocation>?) {
+    fun getMarkerOptions(markerLocations: List<MarkerLocation>?): List<MarkerOptions> {
+        val markersOptions = mutableListOf<MarkerOptions>()
         markerLocations?.forEach { marker ->
             val markerOptions = MarkerOptions()
                 .position(
@@ -28,7 +26,8 @@ class MarkersHandler(
                 else -> { BitmapDescriptorFactory.HUE_MAGENTA }
             }
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(iconColor))
-            googleMap.addMarker(markerOptions)
+            markersOptions.add(markerOptions)
         }
+        return markersOptions
     }
 }
