@@ -77,7 +77,6 @@ class MapFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
-        binding2.amBottomNavigationView.isVisible = true
         return binding.root
     }
 

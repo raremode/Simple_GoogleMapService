@@ -17,16 +17,12 @@ class WelcomeFragment : Fragment() {
     private var _binding: FragmentWelcomeBinding? = null
     private val binding get() = _binding!!
 
-    private var _binding2: ActivityMainBinding? = null
-    private val binding2 get() = _binding2!!
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
-        binding2.amBottomNavigationView.isVisible = false
         return binding.root
     }
 
@@ -37,15 +33,5 @@ class WelcomeFragment : Fragment() {
         }
     }
 
-//    fun hideBottomNavigation() {
-//        // bottom_navigation is BottomNavigationView
-//        with(binding2.amBottomNavigationView) {
-//            if (visibility == android.view.View.VISIBLE && alpha == 1f) {
-//                animate()
-//                    .alpha(0f)
-//                    .withEndAction { visibility = android.view.View.GONE }
-//            }
-//        }
-//    }
 
 }
