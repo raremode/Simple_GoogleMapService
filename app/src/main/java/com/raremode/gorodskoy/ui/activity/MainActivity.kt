@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.auth.ktx.auth
@@ -38,7 +39,13 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavGraph() {
         val auth = Firebase.auth
         navController.setGraph(R.navigation.main_navigation)
-      //  binding.amBottomNavigationView.isVisible = false // скрытие меню навигации
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.welcomeFragment) {
+                binding.amBottomNavigationView.visibility = View.GONE
+            } else {
+                binding.amBottomNavigationView.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun setupBottomNavigation() {
