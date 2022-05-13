@@ -8,9 +8,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -24,10 +26,13 @@ import com.google.android.gms.maps.model.*
 import com.raremode.gorodskoy.R
 import com.raremode.gorodskoy.database.MarkerDao
 import com.raremode.gorodskoy.database.MarkerDatabase
+import com.raremode.gorodskoy.databinding.ActivityMainBinding
 import com.raremode.gorodskoy.databinding.FragmentMapBinding
 import com.raremode.gorodskoy.extensions.bitmapDescriptorFromVector
 import com.raremode.gorodskoy.models.GarbageTypes
 import com.raremode.gorodskoy.models.MarkerLocation
+import com.raremode.gorodskoy.models.Names
+import com.raremode.gorodskoy.ui.activity.MainActivity
 import com.raremode.gorodskoy.ui.fragments.map.adapters.FilterButtonsAdapter
 import com.raremode.gorodskoy.ui.models.FilterButtonModel
 import com.raremode.gorodskoy.utils.JsonAssetsManager
@@ -50,6 +55,9 @@ class MapFragment : Fragment() {
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
 
+    private var _binding2: ActivityMainBinding? = null
+    private val binding2 get() = _binding2!!
+
     //vars
     private var locationPermissionsGranted = false
     private var map: GoogleMap? = null
@@ -65,11 +73,11 @@ class MapFragment : Fragment() {
 
     private val mapViewModel: MapViewModel by viewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
+        binding2.amBottomNavigationView.isVisible = true
         return binding.root
     }
 
@@ -277,6 +285,7 @@ map?.apply {
             dao.addMarkers(markers ?: emptyList())
         }
         markersHandler.setGarbageMarkers(markers)
+
     }
 
     private fun getLocationPermission() {
@@ -312,6 +321,11 @@ map?.apply {
             )
         }
     }
+
+//    private fun addSearchView(point: Names){
+//        val names = markers?.filter { it.name == Names.All.point }
+//Log.d(TAG, "$names")
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

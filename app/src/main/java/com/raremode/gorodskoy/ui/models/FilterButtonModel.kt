@@ -5,5 +5,5 @@ import com.raremode.gorodskoy.models.GarbageTypes
 data class FilterButtonModel(
     val text: String,
     val type: GarbageTypes,
-    var isSelected: Boolean
+    var isSelected: Boolean,
 )

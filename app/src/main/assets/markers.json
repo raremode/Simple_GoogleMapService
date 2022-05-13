@@ -52,7 +52,7 @@
 
     {
       "id": 5,
-      "name": "Place5",
+      "name": "Ломоносова, 62",
       "garbageType": "Batteries",
       "coordinates": {
         "latitude": "47.251831",
@@ -108,6 +108,297 @@
         "latitude": "47.215949",
         "longitude": "38.863600"
       }
+
+
+    },
+
+    {
+      "id": 11,
+      "name": "Place11",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.205514",
+        "longitude": "38.940382"
+      }
+    },
+    {
+      "id": 12,
+      "name": "Place12",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.204951",
+        "longitude": "38.939376"
+      }
+
+    },
+    {
+      "id": 13,
+      "name": "Place13",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.203604",
+        "longitude": "38.943742"
+      }
+    },
+
+    {
+      "id": 14,
+      "name": "Place14",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.269705",
+        "longitude": "38.931747"
+      }
+    },
+
+    {
+      "id": 15,
+      "name": "Place16",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.207159",
+        "longitude": "38.935316"
+      }
+    },
+
+    {
+      "id": 16,
+      "name": "Place16",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.268851",
+        "longitude": "38.925275"
+      }
+    },
+
+    {
+      "id": 17,
+      "name": "Place17",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.278511",
+        "longitude": "38.925068"
+      }
+    },
+
+    {
+      "id": 18,
+      "name": "Place18",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.280007",
+        "longitude": "38.925334"
+      }
+    },
+
+    {
+      "id": 19,
+      "name": "Place19",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.275002",
+        "longitude": "38.905186"
+      }
+    },
+
+    {
+      "id": 20,
+      "name": "Place20",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.204812",
+        "longitude": "38.942036"
+      }
+    },
+
+    {
+      "id": 21,
+      "name": "Place21",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.204067",
+        "longitude": "38.942301"
+      }
+    },
+
+    {
+      "id": 22,
+      "name": "Place22",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.206376",
+        "longitude": "38.947207"
+      }
+    },
+
+    {
+      "id": 23,
+      "name": "Place23",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.209028",
+        "longitude": "38.944661"
+      }
+    },
+
+    {
+      "id": 24,
+      "name": "Place24",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.205982",
+        "longitude": "38.924325"
+      }
+    },
+
+    {
+      "id": 25,
+      "name": "Place25",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.209623",
+        "longitude": "38.908486"
+      }
+    },
+
+    {
+      "id": 26,
+      "name": "Place26",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.210967",
+        "longitude": "38.909047"
+      }
+    },
+
+
+    {
+      "id": 27,
+      "name": "Place27",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.210238",
+        "longitude": "38.915259"
+      }
+    },
+    {
+      "id": 28,
+      "name": "Place28",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.212851",
+        "longitude": "38.910641"
+      }
+    },
+    {
+      "id": 29,
+      "name": "Place29",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.222679",
+        "longitude": "38.928322"
+      }
+
+    },
+    {
+      "id": 30,
+      "name": "Place30",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.263493",
+        "longitude": "38.932063"
+      }
+    },
+
+    {
+      "id": 31,
+      "name": "Place31",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.264432",
+        "longitude": "38.928675"
+      }
+    },
+
+    {
+      "id": 32,
+      "name": "Place32",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.263562",
+        "longitude": "38.937620"
+      }
+    },
+
+    {
+      "id": 33,
+      "name": "Place33",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.257254",
+        "longitude": "38.937612"
+      }
+    },
+
+    {
+      "id": 34,
+      "name": "Place34",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.267466",
+        "longitude": "38.942403"
+      }
+    },
+
+    {
+      "id": 35,
+      "name": "Place35",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.209623",
+        "longitude": "38.908486"
+      }
+    },
+
+    {
+      "id": 36,
+      "name": "Place36",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.205698",
+        "longitude": "38.893157"
+      }
+    },
+
+
+    {
+      "id": 37,
+      "name": "Place37",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47,264003",
+        "longitude": "38,945540"
+      }
+    },
+    {
+      "id": 38,
+      "name": "Place38",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.262097",
+        "longitude": "38.929620"
+      }
+    },
+    {
+      "id": 39,
+      "name": "Place39",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.230213",
+        "longitude": "38.918077"
+      }
+
     }
+
   ]
-}
+}   

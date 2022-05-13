@@ -14,6 +14,7 @@
     <string name="action_sign_in">Войти</string>
     <string name="action_sign_in_short">Зарегистрироваться</string>
     <string name="action_go_to_register">Регистрация</string>
+    <string name="action_go_to_authorization">Авторизация</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>

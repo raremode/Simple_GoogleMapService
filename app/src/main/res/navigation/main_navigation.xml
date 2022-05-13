@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_map">
+    app:startDestination="@+id/welcomeFragment">
 
     <fragment
         android:id="@+id/navigation_map"
@@ -75,5 +75,53 @@
         <action
             android:id="@+id/action_accountRecoveryFragment_to_accountLoginFragment"
             app:destination="@id/accountLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.raremode.gorodskoy.ui.fragments.welcome.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_welcomeAccountLoginFragment"
+            app:destination="@id/welcomeAccountLoginFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_navigation_map"
+            app:destination="@id/navigation_map" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeAccountLoginFragment"
+        android:name="com.raremode.gorodskoy.ui.fragments.welcome.WelcomeAccountLoginFragment"
+        android:label="fragment_welcome_account_login"
+        tools:layout="@layout/fragment_welcome_account_login" >
+        <action
+            android:id="@+id/action_welcomeAccountLoginFragment_to_navigation_map"
+            app:destination="@id/navigation_map" />
+        <action
+            android:id="@+id/action_welcomeAccountLoginFragment_to_welcomeAccountRegisterFragment"
+            app:destination="@id/welcomeAccountRegisterFragment" />
+        <action
+            android:id="@+id/action_welcomeAccountLoginFragment_to_welcomeAccountRecoveryFragment"
+            app:destination="@id/welcomeAccountRecoveryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeAccountRegisterFragment"
+        android:name="com.raremode.gorodskoy.ui.fragments.welcome.WelcomeAccountRegisterFragment"
+        android:label="fragment_welcome_account_register"
+        tools:layout="@layout/fragment_welcome_account_register" >
+        <action
+            android:id="@+id/action_welcomeAccountRegisterFragment_to_navigation_map"
+            app:destination="@id/navigation_map" />
+        <action
+            android:id="@+id/action_welcomeAccountRegisterFragment_to_welcomeAccountLoginFragment"
+            app:destination="@id/welcomeAccountLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeAccountRecoveryFragment"
+        android:name="com.raremode.gorodskoy.ui.fragments.welcome.WelcomeAccountRecoveryFragment"
+        android:label="fragment_welcome_account_recovery"
+        tools:layout="@layout/fragment_welcome_account_recovery" >
+        <action
+            android:id="@+id/action_welcomeAccountRecoveryFragment_to_welcomeAccountLoginFragment"
+            app:destination="@id/welcomeAccountLoginFragment" />
     </fragment>
 </navigation>

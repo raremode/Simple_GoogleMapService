@@ -1,7 +1,9 @@
 package com.raremode.gorodskoy.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -36,10 +38,19 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavGraph() {
         val auth = Firebase.auth
         navController.setGraph(R.navigation.main_navigation)
+      //  binding.amBottomNavigationView.isVisible = false // скрытие меню навигации
     }
 
     private fun setupBottomNavigation() {
         binding.amBottomNavigationView.setupWithNavController(navController)
+    }
+
+    fun hideNavGraph()  {
+        binding.amBottomNavigationView.isVisible = false // для скрытия меню навигации
+    }
+
+    fun showNavGraph()  {
+        binding.amBottomNavigationView.isVisible = true // для показа меню навигации
     }
 
 }
