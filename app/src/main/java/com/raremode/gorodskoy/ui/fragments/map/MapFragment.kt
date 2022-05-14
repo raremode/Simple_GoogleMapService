@@ -17,12 +17,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.raremode.gorodskoy.R
-import com.raremode.gorodskoy.database.MarkerDao
-import com.raremode.gorodskoy.database.MarkerDatabase
 import com.raremode.gorodskoy.databinding.FragmentMapBinding
-import com.raremode.gorodskoy.models.MarkerLocation
 import com.raremode.gorodskoy.ui.fragments.map.adapters.FilterButtonsAdapter
-import com.raremode.gorodskoy.utils.JsonAssetsManager
 import com.raremode.gorodskoy.utils.LocationPermissionManager
 import kotlinx.coroutines.launch
 
@@ -50,7 +46,6 @@ class MapFragment : Fragment() {
         locationPermissionManager = LocationPermissionManager(this)
         initMap()
         setupFilterButtons()
-        requestLocationPermission()
     }
 
     @SuppressLint("MissingPermission")
@@ -88,6 +83,7 @@ class MapFragment : Fragment() {
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.fmMapContainer) as SupportMapFragment
         mapFragment.getMapAsync { googleMap ->
+            requestLocationPermission(googleMap = googleMap)
             mapViewModel.markers.observe(viewLifecycleOwner) { markers ->
                 googleMap.clear()
                 markers.forEach {
