@@ -10,4 +10,11 @@
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/roboto_light</item>
     </style>
+
+    <style name="Theme.CustomSplashScreenTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="postSplashScreenTheme">@style/Theme.Gorodskoy</item>
+    </style>
 </resources>

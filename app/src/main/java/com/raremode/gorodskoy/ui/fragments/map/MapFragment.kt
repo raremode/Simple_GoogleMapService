@@ -16,6 +16,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.raremode.gorodskoy.R
 import com.raremode.gorodskoy.databinding.FragmentMapBinding
 import com.raremode.gorodskoy.ui.fragments.map.adapters.FilterButtonsAdapter
@@ -46,6 +48,7 @@ class MapFragment : Fragment() {
         locationPermissionManager = LocationPermissionManager(this)
         initMap()
         setupFilterButtons()
+        initGooglePlaces()
     }
 
     @SuppressLint("MissingPermission")
@@ -112,6 +115,14 @@ class MapFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun initGooglePlaces() {
+        val autocompleteFragment =
+            childFragmentManager.findFragmentById(R.id.fmGooglePlacesSearch)
+                    as AutocompleteSupportFragment
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+        //TODO this is doesn't work because of google turn of billing for russians
     }
 
     override fun onDestroyView() {
