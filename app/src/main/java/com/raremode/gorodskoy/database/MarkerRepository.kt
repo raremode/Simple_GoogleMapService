@@ -1,6 +1,5 @@
-package com.raremode.gorodskoy.dao.marker
+package com.raremode.gorodskoy.database
 
-import com.raremode.gorodskoy.database.MarkerDao
 import com.raremode.gorodskoy.models.MarkerLocation
 
 class MarkerRepository(private val markerDao: MarkerDao) {

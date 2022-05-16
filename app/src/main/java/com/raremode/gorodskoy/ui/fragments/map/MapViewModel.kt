@@ -9,8 +9,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.model.MarkerOptions
-import com.raremode.gorodskoy.dao.marker.MarkerRepository
+import com.raremode.gorodskoy.database.MarkerRepository
 import com.raremode.gorodskoy.database.MarkerDatabase
+import com.raremode.gorodskoy.database.suggestions.SuggestionModel
+import com.raremode.gorodskoy.database.suggestions.SuggestionsDatabase
+import com.raremode.gorodskoy.database.suggestions.SuggestionsRepository
 import com.raremode.gorodskoy.models.GarbageTypes
 import com.raremode.gorodskoy.models.MarkerLocation
 import com.raremode.gorodskoy.ui.models.FilterButtonModel
@@ -27,11 +30,18 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
         markerDao = MarkerDatabase.getDatabase(application).markerDao()
     )
 
+    private val suggestionRepo: SuggestionsRepository = SuggestionsRepository(
+        suggestionsDao = SuggestionsDatabase.getDatabase(application).suggestionDao()
+    )
+
     private val _location = MutableLiveData<Location>()
     val location: LiveData<Location> = _location
 
     private val _filterButtons = MutableLiveData<List<FilterButtonModel>>()
     val filterButtons: LiveData<List<FilterButtonModel>> = _filterButtons
+
+    private val _suggestions = MutableLiveData<List<String>>()
+    val suggestions: LiveData<List<String>> = _suggestions
 
     private var markersLocation = listOf<MarkerLocation>()
     private var markersHandler: MarkersHandler
@@ -111,6 +121,19 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
             val markersFromDB = repository.readAllMarkersFromDb()
             _markers.postValue(markersHandler.getMarkerOptions(markersFromDB))
             markersLocation = markersFromDB
+        }
+    }
+
+    fun getAllSuggestions() {
+        viewModelScope.launch(Dispatchers.IO) {
+        _suggestions.postValue(suggestionRepo.getAllItems().map { it.suggestion })
+        }
+    }
+
+    fun addSuggestionItem(item: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            suggestionRepo.addSuggestionItem(SuggestionModel(suggestion = item))
+            getAllSuggestions()
         }
     }
 

@@ -18,13 +18,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <fragment
-            android:id="@+id/fmGooglePlacesSearch"
-            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/fmSearchView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorNavigation"
+            android:elevation="@dimen/dimen_10dp"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@android:color/transparent" />
 
     </androidx.cardview.widget.CardView>
+
+    <ProgressBar
+        android:id="@+id/fmProgressBar"
+        android:layout_width="@dimen/dimen_48dp"
+        android:layout_height="@dimen/dimen_48dp"
+        android:elevation="@dimen/dimen_20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fmRecyclerFilterButtons"
