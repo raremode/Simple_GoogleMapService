@@ -1,18 +1,15 @@
 package com.raremode.gorodskoy.ui.activity
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.raremode.gorodskoy.R
 import com.raremode.gorodskoy.databinding.ActivityMainBinding
+import com.raremode.gorodskoy.extensions.beGoneIf
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,17 +33,13 @@ class MainActivity : AppCompatActivity() {
             R.id.amFragmentContainer
         ) as NavHostFragment
         navController = navHostFragment.navController
+
     }
 
     private fun setupNavGraph() {
-        val auth = Firebase.auth
         navController.setGraph(R.navigation.main_navigation)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.welcomeFragment) {
-                binding.amBottomNavigationView.visibility = View.GONE
-            } else {
-                binding.amBottomNavigationView.visibility = View.VISIBLE
-            }
+            binding.amBottomNavigationView.beGoneIf(destination.id == R.id.welcomeFragment)
         }
     }
 
