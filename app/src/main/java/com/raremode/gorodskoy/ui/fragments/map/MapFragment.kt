@@ -2,6 +2,7 @@ package com.raremode.gorodskoy.ui.fragments.map
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -65,6 +66,7 @@ class MapFragment : Fragment() {
     private var prevLocationMarker: LatLng = LatLng(0.0, 0.0)
     private lateinit var myMarker: Marker
     private var isOpened = true
+    var firstOpenFragment = true
     private lateinit var markersHandler: MarkersHandler
 
     private lateinit var dao: MarkerDao
@@ -72,6 +74,7 @@ class MapFragment : Fragment() {
     private var markers: List<MarkerLocation>? = null
 
     private val mapViewModel: MapViewModel by viewModels()
+    private val defaultLatLng = LatLng(47.22, 38.81)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -116,6 +119,7 @@ class MapFragment : Fragment() {
             map?.clear()
             Log.d(TAG, "ClearCache: cleared well")
         }, 0, 30, TimeUnit.SECONDS) // очистка кеша карты
+
     }
 
     private fun setupFilterButtons() {
@@ -144,11 +148,15 @@ class MapFragment : Fragment() {
                     if (task.isSuccessful) {
                         Log.d(TAG, "onComplete: found location!")
                         val currentLocation = task.result
+//                        if(firstOpenFragment){
+//                            moveCamera(defaultLatLng, zoom = 15f)
+//                            firstOpenFragment = false
+//                        }
                         if (currentLocation != null) {
-                            moveCamera(
-                                LatLng(currentLocation.latitude, currentLocation.longitude),
-                                DEFAULT_ZOOM
-                            )
+//                            moveCamera(
+//                                LatLng(currentLocation.latitude, currentLocation.longitude),
+//                                DEFAULT_ZOOM
+//                            )
                             setMyselfMarker(currentLocation = currentLocation)
                         }
                     } else {
@@ -192,7 +200,7 @@ class MapFragment : Fragment() {
                         Log.d(TAG, "onComplete: found NEW location!")
                         val currentLocation = task.result
                         if (currentLocation != null) {
-                            setMyselfMarker(currentLocation = currentLocation)
+                   //         setMyselfMarker(currentLocation = currentLocation)
                         }
                     } else {
                         Log.d(TAG, "onComplete: current location is null")
@@ -223,13 +231,14 @@ class MapFragment : Fragment() {
             childFragmentManager.findFragmentById(R.id.fmMapContainer) as SupportMapFragment
         mapFragment.getMapAsync { googleMap ->
             Log.d(TAG, "initMap: initializing map")
-            Toast.makeText(context, "Map is ready", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "Map is ready", Toast.LENGTH_SHORT).show()
             Log.d(TAG, "onMapReady: map is ready")
             markersHandler = MarkersHandler(googleMap)
             mapViewModel.markers.observe(viewLifecycleOwner) { markers ->
                 map?.clear()
                 markersHandler.setGarbageMarkers(markers)
             }
+
             map = googleMap
             if (locationPermissionsGranted) {
                 getDeviceLocation()
@@ -242,13 +251,14 @@ class MapFragment : Fragment() {
                         Manifest.permission.ACCESS_COARSE_LOCATION
                     ) != PackageManager.PERMISSION_GRANTED
                 )
-                    map?.isMyLocationEnabled = true
-                map?.uiSettings?.isMyLocationButtonEnabled = true
-                map?.uiSettings?.isZoomControlsEnabled = false
-                map?.uiSettings?.isMapToolbarEnabled = false
-                map?.uiSettings?.isCompassEnabled = false
-                getGarbageMarkers()
-                map?.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.mapstyle))
+                    googleMap.isMyLocationEnabled = true
+//                map?.uiSettings?.isMyLocationButtonEnabled = true
+//                googleMap.
+//                map?.uiSettings?.isZoomControlsEnabled = false
+//                map?.uiSettings?.isMapToolbarEnabled = false
+//                map?.uiSettings?.isCompassEnabled = false
+               // getGarbageMarkers()  //спустя некоторое время я нашёл ту самую строчку, из-за которой сбрасывался фильтр :)
+              //  map?.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.mapstyle))
             }
         }
     }
@@ -266,9 +276,9 @@ class MapFragment : Fragment() {
                     context?.bitmapDescriptorFromVector(R.drawable.ic_map_marker)
                 )
                 //        myMarker = map?.addMarker(options)!!
-map?.apply {
-    addMarker(MarkerOptions().position(myLocationMarker).icon(context?.bitmapDescriptorFromVector(R.drawable.ic_map_marker)))
-}
+//map?.apply {
+//    addMarker(MarkerOptions().position(myLocationMarker).icon(context?.bitmapDescriptorFromVector(R.drawable.ic_map_marker)))
+//}
 
     }
 
@@ -278,14 +288,14 @@ map?.apply {
         }
     }
 
-    private fun getGarbageMarkers() {
-        markers = jsonAssetsManager.getMarkers()
-        lifecycleScope.launch {
-            dao.addMarkers(markers ?: emptyList())
-        }
-        markersHandler.setGarbageMarkers(markers)
-
-    }
+//    private fun getGarbageMarkers() {
+//        markers = jsonAssetsManager.getMarkers()
+//        lifecycleScope.launch {
+//            dao.addMarkers(markers ?: emptyList())
+//        }
+//        markersHandler.setGarbageMarkers(markers)
+//
+//    }
 
     private fun getLocationPermission() {
         Log.d(TAG, "getLocationPermission: getting location permissions")

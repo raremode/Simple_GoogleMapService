@@ -1,15 +1,18 @@
 package com.raremode.gorodskoy.ui.fragments.map
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import android.content.Context
+import androidx.lifecycle.*
+import com.google.android.gms.maps.model.LatLng
+import com.raremode.gorodskoy.R
 import com.raremode.gorodskoy.dao.marker.MarkerRepository
+import com.raremode.gorodskoy.database.MarkerDao
 import com.raremode.gorodskoy.database.MarkerDatabase
 import com.raremode.gorodskoy.models.GarbageTypes
 import com.raremode.gorodskoy.models.MarkerLocation
 import com.raremode.gorodskoy.ui.models.FilterButtonModel
+import com.raremode.gorodskoy.utils.JsonAssetsManager
+import com.raremode.gorodskoy.utils.MarkersHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -27,6 +30,15 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
 
     private var markersLocation = listOf<MarkerLocation>()
 
+    private val _position = MutableLiveData<LatLng>()
+    val position: LiveData<LatLng> = _position
+
+    private lateinit var jsonAssetsManager: JsonAssetsManager
+    private var garbageMarkers: List<MarkerLocation>? = null
+    private lateinit var dao: MarkerDao
+    private lateinit var markersHandler: MarkersHandler
+
+
     init {
         getAllMarkers()
         initFilterButtons()
@@ -34,10 +46,10 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun initFilterButtons() {
         val filterButtonItems = mutableListOf<FilterButtonModel>()
-        filterButtonItems.add(FilterButtonModel("Всё", GarbageTypes.All, true))
-        filterButtonItems.add(FilterButtonModel("Пластик", GarbageTypes.PLASTIC, false))
-        filterButtonItems.add(FilterButtonModel("Батарейки", GarbageTypes.BATTERIES, false))
-        filterButtonItems.add(FilterButtonModel("Стекло", GarbageTypes.GLASS, false))
+        filterButtonItems.add(FilterButtonModel( getStringAll(), GarbageTypes.All, true))
+        filterButtonItems.add(FilterButtonModel(getStringPlastic(), GarbageTypes.PLASTIC, false))
+        filterButtonItems.add(FilterButtonModel(getStringBatteries(), GarbageTypes.BATTERIES, false))
+        filterButtonItems.add(FilterButtonModel(getStringGlass(), GarbageTypes.GLASS, false))
         _filterButtons.value = filterButtonItems
 //        val adapter = FilterButtonsAdapter(filterButtonItems)
 //        adapter.clickCallback = { filterButtonModel ->
@@ -81,4 +93,26 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    private suspend fun getGarbageMarkers() {
+        garbageMarkers = jsonAssetsManager.getMarkers()
+            dao.addMarkers(garbageMarkers ?: emptyList())
+        markersHandler.setGarbageMarkers(garbageMarkers)
+
+    }
+
+    fun getStringAll(): String {
+        return getApplication<Application>().resources.getString(R.string.all)
+    }
+
+    fun getStringPlastic(): String {
+        return getApplication<Application>().resources.getString(R.string.plastic)
+    }
+
+    fun getStringGlass(): String {
+        return getApplication<Application>().resources.getString(R.string.glass)
+    }
+
+    fun getStringBatteries(): String {
+        return getApplication<Application>().resources.getString(R.string.batteries)
+    }
 }

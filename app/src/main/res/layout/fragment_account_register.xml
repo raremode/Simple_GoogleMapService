@@ -152,7 +152,7 @@
         android:background="@android:color/transparent"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        android:src="@android:drawable/ic_menu_revert"
+        android:src="@drawable/backbutton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />

@@ -1,5 +1,6 @@
 package com.raremode.gorodskoy.ui.fragments.map.viewholders
 
+import android.graphics.Color
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.raremode.gorodskoy.databinding.ItemFilterButtonBinding
@@ -25,6 +26,7 @@ class FilterButtonViewHolder(private val binding: ItemFilterButtonBinding) :
             }
             itemView.setOnClickListener {
                 clickCallback?.invoke(button)
+                binding.ifbCardViewText.setBackgroundColor(Color.parseColor("#000000"))
             }
         }
 }

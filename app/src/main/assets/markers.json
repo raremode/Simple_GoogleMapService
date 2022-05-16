@@ -52,7 +52,7 @@
 
     {
       "id": 5,
-      "name": "Ломоносова, 62",
+      "name": "Place5",
       "garbageType": "Batteries",
       "coordinates": {
         "latitude": "47.251831",
@@ -153,7 +153,7 @@
 
     {
       "id": 15,
-      "name": "Place16",
+      "name": "Place15",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.207159",
@@ -298,7 +298,6 @@
         "latitude": "47.222679",
         "longitude": "38.928322"
       }
-
     },
     {
       "id": 30,
@@ -376,8 +375,8 @@
       "name": "Place37",
       "garbageType": "Plastic",
       "coordinates": {
-        "latitude": "47,264003",
-        "longitude": "38,945540"
+        "latitude": "47.264003",
+        "longitude": "38.945540"
       }
     },
     {

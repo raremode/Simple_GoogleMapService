@@ -7,29 +7,12 @@
     android:background="@color/colorNavigation"
     tools:context=".ui.fragments.welcome.WelcomeFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="435dp"
-        android:layout_height="765dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="111dp"
-        android:layout_marginBottom="-100dp"
-        android:scaleX="2.3"
-        android:scaleY="2.7"
-        android:src="@drawable/account_layout_background2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.696" />
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="312dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/roboto_bold"
         android:text="Чем полезна наша карта?"
@@ -41,10 +24,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="580dp"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="435dp"
+            android:layout_height="765dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="-50dp"
+            android:scaleX="2.3"
+            android:scaleY="2.7"
+            android:src="@drawable/account_layout_background2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/authorization"
@@ -63,7 +59,7 @@
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
-            app:layout_constraintVertical_bias="0.875" />
+            app:layout_constraintVertical_bias="0.884" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -107,7 +103,7 @@
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.171" />
+            app:layout_constraintVertical_bias="0.297" />
 
         <TextView
             android:id="@+id/textView5"
@@ -124,7 +120,7 @@
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.269" />
+            app:layout_constraintVertical_bias="0.864" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -154,9 +150,10 @@
             android:src="@drawable/landscapephoto"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
-            app:layout_constraintVertical_bias="0.202" />
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
