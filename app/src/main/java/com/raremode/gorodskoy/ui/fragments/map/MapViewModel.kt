@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.model.MarkerOptions
+import com.raremode.gorodskoy.R
 import com.raremode.gorodskoy.database.MarkerRepository
 import com.raremode.gorodskoy.database.MarkerDatabase
 import com.raremode.gorodskoy.database.suggestions.SuggestionModel
@@ -17,6 +18,7 @@ import com.raremode.gorodskoy.database.suggestions.SuggestionsRepository
 import com.raremode.gorodskoy.models.GarbageTypes
 import com.raremode.gorodskoy.models.MarkerLocation
 import com.raremode.gorodskoy.ui.models.FilterButtonModel
+import com.raremode.gorodskoy.ui.provider.ResourceProvider
 import com.raremode.gorodskoy.utils.JsonAssetsManager
 import com.raremode.gorodskoy.utils.MarkersHandler
 import kotlinx.coroutines.*
@@ -47,19 +49,20 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
     private var markersHandler: MarkersHandler
     private var updateLocationJob: Job? = null
     private var jsonAssetsManager = JsonAssetsManager(application)
+    private var resourceProvider = ResourceProvider(application)
 
     init {
-        getAllMarkers()
         initFilterButtons()
         markersHandler = MarkersHandler()
         jsonAssetsManager.parseJsonFromAssets {
             addMarkers(it)
         }
+        getAllMarkers()
     }
 
     private fun initFilterButtons() {
         val filterButtonItems = mutableListOf<FilterButtonModel>()
-        filterButtonItems.add(FilterButtonModel("Всё", GarbageTypes.All, true))
+        filterButtonItems.add(FilterButtonModel(resourceProvider.getString(R.string.map_fragment_type_all), GarbageTypes.All, true))
         filterButtonItems.add(FilterButtonModel("Пластик", GarbageTypes.PLASTIC, false))
         filterButtonItems.add(FilterButtonModel("Батарейки", GarbageTypes.BATTERIES, false))
         filterButtonItems.add(FilterButtonModel("Стекло", GarbageTypes.GLASS, false))
