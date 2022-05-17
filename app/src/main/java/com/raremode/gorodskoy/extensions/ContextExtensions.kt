@@ -3,7 +3,11 @@ package com.raremode.gorodskoy.extensions
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
@@ -35,4 +39,13 @@ fun Context.bitmapDescriptorFromVector(vectorResId: Int): BitmapDescriptor {
     val canvas = Canvas(bitmap)
     vectorDrawable?.draw(canvas)
     return BitmapDescriptorFactory.fromBitmap(bitmap)
+}
+
+private fun Context.hideKeyboard(view: View) {
+    val inputMethodManager = getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun Fragment.hideKeyboard() {
+    view?.let { context?.hideKeyboard(it) }
 }

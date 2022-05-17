@@ -10,7 +10,7 @@ import com.raremode.gorodskoy.databinding.ItemFilterButtonBinding
 import com.raremode.gorodskoy.ui.fragments.map.viewholders.FilterButtonViewHolder
 import com.raremode.gorodskoy.ui.models.FilterButtonModel
 
-class FilterButtonsAdapter() :
+class FilterButtonsAdapter :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var items: List<FilterButtonModel>
@@ -22,7 +22,7 @@ class FilterButtonsAdapter() :
         notifyDataSetChanged()
     }
 
-    var clickCallback: ((filterButtonModel: FilterButtonModel) -> Unit)? = null
+    var clickCallback: ((button: FilterButtonModel, position: Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return FilterButtonViewHolder(
