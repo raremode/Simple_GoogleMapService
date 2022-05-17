@@ -169,7 +169,7 @@ class MapFragment : Fragment() {
                     fmProgressBar.beVisible()
                     mapViewModel.addSuggestionItem(query)
                     runCatching {
-                        geocoder.getFromLocationName(query, 1)
+                        geocoder.getFromLocationName("таганрог $query", 1)
                     }.onSuccess { addressList ->
                         val address = addressList?.firstOrNull()
                         if (address != null) {
