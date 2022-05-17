@@ -63,9 +63,9 @@ class MapViewModel(application: Application) : AndroidViewModel(application) {
     private fun initFilterButtons() {
         val filterButtonItems = mutableListOf<FilterButtonModel>()
         filterButtonItems.add(FilterButtonModel(resourceProvider.getString(R.string.map_fragment_type_all), GarbageTypes.All, true))
-        filterButtonItems.add(FilterButtonModel("Пластик", GarbageTypes.PLASTIC, false))
-        filterButtonItems.add(FilterButtonModel("Батарейки", GarbageTypes.BATTERIES, false))
-        filterButtonItems.add(FilterButtonModel("Стекло", GarbageTypes.GLASS, false))
+        filterButtonItems.add(FilterButtonModel(resourceProvider.getString(R.string.map_fragment_type_plastic), GarbageTypes.PLASTIC, false))
+        filterButtonItems.add(FilterButtonModel(resourceProvider.getString(R.string.map_fragment_type_batteries), GarbageTypes.BATTERIES, false))
+        filterButtonItems.add(FilterButtonModel(resourceProvider.getString(R.string.map_fragment_type_glass), GarbageTypes.GLASS, false))
         _filterButtons.value = filterButtonItems
     }
 

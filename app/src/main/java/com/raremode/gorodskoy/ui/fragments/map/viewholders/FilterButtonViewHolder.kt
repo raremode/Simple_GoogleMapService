@@ -17,7 +17,7 @@ class FilterButtonViewHolder(private val binding: ItemFilterButtonBinding) :
     fun bind(button: FilterButtonModel, size: Int) {
         binding.ifbTextView.text = button.text
         binding.ifbCardViewText.setCardBackgroundColor(
-            if (button.isSelected) ContextCompat.getColor(itemView.context, R.color.colorAccount)
+            if (button.isSelected) ContextCompat.getColor(itemView.context, R.color.colorPrimaryBright)
             else ContextCompat.getColor(itemView.context, R.color.colorButtons)
         )
         when (adapterPosition) {
