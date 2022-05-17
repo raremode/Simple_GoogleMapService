@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
@@ -67,30 +66,27 @@ class MainActivity : AppCompatActivity(), OnKeyboardVisibilityListener {
 
     private fun setupKeyboardVisibilityListener(onKeyboardVisibilityListener: OnKeyboardVisibilityListener) {
         val parentView = (findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0)
-        parentView.viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            private var alreadyOpen = false
-            private val defaultKeyboardHeightDP = 100
-            private val EstimatedKeyboardDP =
-                defaultKeyboardHeightDP + 48
-            private val rect: Rect = Rect()
-            override fun onGlobalLayout() {
-                val estimatedKeyboardHeight = TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    EstimatedKeyboardDP.toFloat(),
-                    parentView.resources.displayMetrics
-                )
-                    .toInt()
-                parentView.getWindowVisibleDisplayFrame(rect)
-                val heightDiff: Int = parentView.rootView.height - (rect.bottom - rect.top)
-                val isShown = heightDiff >= estimatedKeyboardHeight
-                if (isShown == alreadyOpen) {
-                    return
-                }
-                alreadyOpen = isShown
-                onKeyboardVisibilityListener.onVisibilityChanged(isShown)
+        var alreadyOpen = false
+        val defaultKeyboardHeightDP = 100
+        val estimatedKeyboardDP =
+            defaultKeyboardHeightDP + 48
+        val rect = Rect()
+        parentView.viewTreeObserver.addOnGlobalLayoutListener {
+            val estimatedKeyboardHeight = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                estimatedKeyboardDP.toFloat(),
+                parentView.resources.displayMetrics
+            )
+                .toInt()
+            parentView.getWindowVisibleDisplayFrame(rect)
+            val heightDiff = parentView.rootView.height - (rect.bottom - rect.top)
+            val isShown = heightDiff >= estimatedKeyboardHeight
+            if (isShown == alreadyOpen) {
+                return@addOnGlobalLayoutListener
             }
-        })
+            alreadyOpen = isShown
+            onKeyboardVisibilityListener.onVisibilityChanged(isShown)
+        }
     }
 
     override fun onVisibilityChanged(visible: Boolean) {
