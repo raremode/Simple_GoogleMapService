@@ -1,10 +1,6 @@
 package com.raremode.gorodskoy.ui.activity
 
-import android.graphics.Rect
 import android.os.Bundle
-import android.util.TypedValue
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
@@ -15,8 +11,9 @@ import com.google.firebase.ktx.Firebase
 import com.raremode.gorodskoy.R
 import com.raremode.gorodskoy.databinding.ActivityMainBinding
 import com.raremode.gorodskoy.extensions.beGoneIf
+import com.raremode.gorodskoy.extensions.setupKeyboardListener
 
-class MainActivity : AppCompatActivity(), OnKeyboardVisibilityListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -31,7 +28,17 @@ class MainActivity : AppCompatActivity(), OnKeyboardVisibilityListener {
         setupNavController()
         setupNavGraph()
         setupBottomNavigation()
-        setupKeyboardVisibilityListener(this)
+        setupKeyboardListener { isShown ->
+            if (navController.currentDestination?.id == R.id.welcomeFragment
+                || navController.currentDestination?.id == R.id.welcomeAccountLoginFragment
+                || navController.currentDestination?.id == R.id.welcomeAccountRecoveryFragment
+                || navController.currentDestination?.id == R.id.welcomeAccountRegisterFragment
+            ) {
+                return@setupKeyboardListener
+            } else {
+                binding.amBottomNavigationView.beGoneIf(isShown)
+            }
+        }
     }
 
     private fun setupNavController() {
@@ -62,43 +69,6 @@ class MainActivity : AppCompatActivity(), OnKeyboardVisibilityListener {
 
     private fun setupBottomNavigation() {
         binding.amBottomNavigationView.setupWithNavController(navController)
-    }
-
-    private fun setupKeyboardVisibilityListener(onKeyboardVisibilityListener: OnKeyboardVisibilityListener) {
-        val parentView = (findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0)
-        var alreadyOpen = false
-        val defaultKeyboardHeightDP = 100
-        val estimatedKeyboardDP =
-            defaultKeyboardHeightDP + 48
-        val rect = Rect()
-        parentView.viewTreeObserver.addOnGlobalLayoutListener {
-            val estimatedKeyboardHeight = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                estimatedKeyboardDP.toFloat(),
-                parentView.resources.displayMetrics
-            )
-                .toInt()
-            parentView.getWindowVisibleDisplayFrame(rect)
-            val heightDiff = parentView.rootView.height - (rect.bottom - rect.top)
-            val isShown = heightDiff >= estimatedKeyboardHeight
-            if (isShown == alreadyOpen) {
-                return@addOnGlobalLayoutListener
-            }
-            alreadyOpen = isShown
-            onKeyboardVisibilityListener.onVisibilityChanged(isShown)
-        }
-    }
-
-    override fun onVisibilityChanged(visible: Boolean) {
-        if (navController.currentDestination?.id == R.id.welcomeFragment
-            || navController.currentDestination?.id == R.id.welcomeAccountLoginFragment
-            || navController.currentDestination?.id == R.id.welcomeAccountRecoveryFragment
-            || navController.currentDestination?.id == R.id.welcomeAccountRegisterFragment
-        ) {
-            return
-        } else {
-            binding.amBottomNavigationView.beGoneIf(visible)
-        }
     }
 
 }

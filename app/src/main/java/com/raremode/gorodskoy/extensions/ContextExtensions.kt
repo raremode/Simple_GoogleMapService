@@ -1,9 +1,13 @@
 package com.raremode.gorodskoy.extensions
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Rect
+import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -44,6 +48,31 @@ fun Context.bitmapDescriptorFromVector(vectorResId: Int): BitmapDescriptor {
 private fun Context.hideKeyboard(view: View) {
     val inputMethodManager = getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun Activity.setupKeyboardListener(callback: (isShown: Boolean) -> Unit) {
+    val parentView = (findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0)
+    var alreadyOpen = false
+    val defaultKeyboardHeightDP = 100
+    val estimatedKeyboardDP =
+        defaultKeyboardHeightDP + 48
+    val rect = Rect()
+    parentView.viewTreeObserver.addOnGlobalLayoutListener {
+        val estimatedKeyboardHeight = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            estimatedKeyboardDP.toFloat(),
+            parentView.resources.displayMetrics
+        )
+            .toInt()
+        parentView.getWindowVisibleDisplayFrame(rect)
+        val heightDiff = parentView.rootView.height - (rect.bottom - rect.top)
+        val isShown = heightDiff >= estimatedKeyboardHeight
+        if (isShown == alreadyOpen) {
+            return@addOnGlobalLayoutListener
+        }
+        alreadyOpen = isShown
+        callback(isShown)
+    }
 }
 
 fun Fragment.hideKeyboard() {
