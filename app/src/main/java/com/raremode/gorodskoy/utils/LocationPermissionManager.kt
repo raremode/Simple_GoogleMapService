@@ -23,7 +23,7 @@ class LocationPermissionManager(
         request.send()
     }
 
-    fun isLocationPermissionGranted(): Boolean {
+    private fun isLocationPermissionGranted(): Boolean {
         return when (PackageManager.PERMISSION_GRANTED) {
             fragment.activity?.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) -> {
                 true

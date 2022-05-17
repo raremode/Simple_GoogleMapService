@@ -45,6 +45,12 @@ class MainActivity : AppCompatActivity(), OnKeyboardVisibilityListener {
 
     private fun setupNavGraph() {
         val graph = navHostFragment.navController.navInflater.inflate(R.navigation.main_navigation)
+        if (Firebase.auth.currentUser?.uid != null) {
+            graph.setStartDestination(R.id.navigation_map)
+        } else {
+            graph.setStartDestination(R.id.welcomeFragment)
+        }
+        navController.setGraph(graph = graph, null)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.amBottomNavigationView.beGoneIf(
                 destination.id == R.id.welcomeFragment
@@ -52,12 +58,6 @@ class MainActivity : AppCompatActivity(), OnKeyboardVisibilityListener {
                         || destination.id == R.id.welcomeAccountRegisterFragment
                         || destination.id == R.id.welcomeAccountLoginFragment
             )
-            if (Firebase.auth.currentUser?.uid != null) {
-                graph.setStartDestination(R.id.navigation_map)
-            } else {
-                graph.setStartDestination(R.id.welcomeFragment)
-            }
-            navController.setGraph(graph = graph, null)
         }
     }
 
