@@ -120,6 +120,7 @@ class MapFragment : Fragment() {
                 }
             }
             googleMap.apply {
+                moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(47.223037, 38.913494), 13f)) //дефолтная позиция карты при открытии приложения
                 uiSettings.apply {
                     isMyLocationButtonEnabled = false
                     isZoomControlsEnabled = false
