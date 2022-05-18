@@ -16,6 +16,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.raremode.gorodskoy.R
 import com.raremode.gorodskoy.databinding.FragmentAccountLoginBinding
+import com.raremode.gorodskoy.extensions.beGone
+import com.raremode.gorodskoy.extensions.beInvisible
+import com.raremode.gorodskoy.extensions.beVisible
 import com.raremode.gorodskoy.ui.fragments.account.AccountFragment
 
 class AccountLoginFragment : Fragment() {
@@ -49,7 +52,7 @@ class AccountLoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+binding.loadinglogin.beInvisible()
         binding.backtoAccountFragment.setOnClickListener {
             findNavController().navigate(
                 R.id.action_accountLoginFragment_to_navigation_account
@@ -69,24 +72,27 @@ class AccountLoginFragment : Fragment() {
         val loginButton = binding.login
         val forgotPassworded = binding.forgotPassword
         val gotoRegistration = binding.register
-        val loadingProgressBar = binding.loading
+        val loadingProgressBar = binding.loadinglogin
 
         mDatabase = FirebaseDatabase.getInstance()
         mDatabaseReference = mDatabase!!.reference!!.child("Users")
         MAuth = FirebaseAuth.getInstance()
 
         loginButton.setOnClickListener {
-
+binding.loadinglogin.beVisible()
             email = usernameEditText.text.toString()
             password = passwordEditText.text.toString()
 
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(context, "Неверный формат почты", Toast.LENGTH_SHORT).show()
+                binding.loadinglogin.beInvisible()
             } else if (TextUtils.isEmpty(password)) {
                 Toast.makeText(context, "Неверный формат пароля", Toast.LENGTH_SHORT).show()
+                binding.loadinglogin.beInvisible()
             } else {
                 MAuth!!.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        binding.loadinglogin.beInvisible()
                         Toast.makeText(
                             context,
                             "Вы успешно вошли в аккаунт!",
@@ -103,6 +109,7 @@ class AccountLoginFragment : Fragment() {
                             args = loginedBundle
                         )
                     } else {
+                        binding.loadinglogin.beInvisible()
                         Toast.makeText(
                             context,
                             "Ошибка входа: " + task.exception!!.message,

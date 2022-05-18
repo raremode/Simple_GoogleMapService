@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.raremode.gorodskoy.R
 import com.raremode.gorodskoy.databinding.FragmentAccountRegisterBinding
+import com.raremode.gorodskoy.extensions.beInvisible
+import com.raremode.gorodskoy.extensions.beVisible
 
 class AccountRegisterFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -40,7 +42,7 @@ class AccountRegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.loadingregister.beInvisible()
         binding.backtoAccountLoginFragment.setOnClickListener {
             findNavController().navigate(R.id.action_accountRegisterFragment_to_accountLoginFragment)
         }
@@ -49,13 +51,14 @@ class AccountRegisterFragment : Fragment() {
         val newPasswordEditText = binding.newPassword
         val confirmPasswordEditText = binding.confirmNewPassword
         val registerButton = binding.signUp
-        val loadingProgressBar = binding.loading
+        val loadingProgressBar = binding.loadingregister
 
         mDatabase = FirebaseDatabase.getInstance()
         mDatabaseReference = mDatabase!!.reference!!.child("Users")
         MAuth = FirebaseAuth.getInstance()
 
         registerButton.setOnClickListener {
+            binding.loadingregister.beVisible()
             val email = newUsernameEditText.text.toString()
             val password = newPasswordEditText.text.toString()
             val confirmpassword = confirmPasswordEditText.text.toString()
@@ -63,6 +66,7 @@ class AccountRegisterFragment : Fragment() {
                 MAuth!!.createUserWithEmailAndPassword(email, password).addOnCompleteListener(
                     OnCompleteListener<AuthResult?> { task ->
                         if (task.isSuccessful) {
+                            binding.loadingregister.beInvisible()
                             Toast.makeText(
                                 context,
                                 "Пользователь успешно зарегистрирован!",
@@ -70,6 +74,7 @@ class AccountRegisterFragment : Fragment() {
                             ).show()
 
                         } else {
+                            binding.loadingregister.beInvisible()
                             Toast.makeText(
                                 context,
                                 "Ошибка регистрации: " + task.exception!!.message,
@@ -79,7 +84,10 @@ class AccountRegisterFragment : Fragment() {
                         }
                     })
             }
-            else Toast.makeText(context, "Пароли не совпадают", Toast.LENGTH_SHORT).show()
+            else {
+                binding.loadingregister.beInvisible()
+                Toast.makeText(context, "Пароли не совпадают", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

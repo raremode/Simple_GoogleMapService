@@ -49,7 +49,7 @@ class WelcomeAccountRegisterFragment : Fragment() {
         val newPasswordEditText = binding.newPassword
         val confirmPasswordEditText = binding.confirmNewPassword
         val registerButton = binding.signUp
-        val loadingProgressBar = binding.loading
+        val loadingProgressBar = binding.loadingwelcomeregister
 
         mDatabase = FirebaseDatabase.getInstance()
         mDatabaseReference = mDatabase!!.reference!!.child("Users")

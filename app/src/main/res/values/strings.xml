@@ -17,6 +17,8 @@
     <string name="action_forgot_password">Забыли пароль?</string>
     <string name="action_go_to_register">Регистрация</string>
     <string name="action_go_to_authorization">Авторизация</string>
+    <string name="action_go_to_settings">Настройки</string>
+    <string name="action_go_to_about_app">О приложении</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>

@@ -29,7 +29,7 @@ class AccountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         accountViewModel.loginState.observe(viewLifecycleOwner) { loginStateModel ->
             binding.apply {
-                gotoLogin.text = loginStateModel.buttonText
+                //gotoLogin.text = loginStateModel.buttonText
                 NameField.text = loginStateModel.email
                 gotoLogin.setOnClickListener() {
                     if (loginStateModel.isLogged) {

@@ -70,7 +70,7 @@ class WelcomeAccountLoginFragment : Fragment() {
         val loginButton = binding.login
         val forgotPassworded = binding.forgotPassword
         val gotoRegistration = binding.register
-        val loadingProgressBar = binding.loading
+        val loadingProgressBar = binding.loadingwelcomelogin
 
         mDatabase = FirebaseDatabase.getInstance()
         mDatabaseReference = mDatabase!!.reference!!.child("Users")

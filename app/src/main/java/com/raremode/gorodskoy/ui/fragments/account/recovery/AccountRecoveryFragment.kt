@@ -16,6 +16,8 @@ import com.raremode.gorodskoy.R
 import com.raremode.gorodskoy.databinding.FragmentAccountLoginBinding
 import com.raremode.gorodskoy.databinding.FragmentAccountRecoveryBinding
 import com.raremode.gorodskoy.databinding.FragmentNewsBinding
+import com.raremode.gorodskoy.extensions.beInvisible
+import com.raremode.gorodskoy.extensions.beVisible
 
 class AccountRecoveryFragment : Fragment() {
 
@@ -44,6 +46,7 @@ class AccountRecoveryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.loadingrecover.beInvisible()
         binding.backtoAccountLoginFragment.setOnClickListener {
            findNavController().navigate(R.id.action_accountRecoveryFragment_to_accountLoginFragment)
         }
@@ -55,10 +58,12 @@ class AccountRecoveryFragment : Fragment() {
         MAuth = FirebaseAuth.getInstance()
 
 binding.recover.setOnClickListener {
+    binding.loadingrecover.beVisible()
     mail = recoveringMail.text.toString()
     if (TextUtils.isEmpty(mail)) {
         Toast.makeText(context, "Неверный формат почты", Toast.LENGTH_SHORT).show()
         Log.d(TAG, "|$mail|")
+        binding.loadingrecover.beInvisible()
     } else {
         MAuth!!.sendPasswordResetEmail(mail).addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -67,6 +72,7 @@ binding.recover.setOnClickListener {
                     "Письмо для смены пароля отправлено на почту",
                     Toast.LENGTH_SHORT
                 ).show()
+                binding.loadingrecover.beInvisible()
                 findNavController().navigate(R.id.action_accountRecoveryFragment_to_accountLoginFragment)
             } else {
                 Toast.makeText(
@@ -75,6 +81,7 @@ binding.recover.setOnClickListener {
                     Toast.LENGTH_SHORT
                 ).show()
                 Log.d(TAG, " |$mail| " + task.exception!!.message)
+                binding.loadingrecover.beInvisible()
             }
         }
     }
