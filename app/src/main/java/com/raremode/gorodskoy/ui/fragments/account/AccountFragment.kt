@@ -40,6 +40,12 @@ class AccountFragment : Fragment() {
                         )
                     }
                 }
+                gotoSettings.setOnClickListener {
+                    findNavController().navigate(R.id.action_navigation_account_to_navigation_settings)
+                }
+                gotoAboutApp.setOnClickListener {
+                    findNavController().navigate(R.id.action_navigation_account_to_aboutFragment)
+                }
             }
         }
         accountViewModel.checkLoginState()

@@ -15,7 +15,17 @@
         android:id="@+id/navigation_settings"
         android:name="com.raremode.gorodskoy.ui.fragments.settings.SettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_navigation_account"
+            app:destination="@id/navigation_account" />
+        <action
+            android:id="@+id/action_navigation_settings_to_accountRegisterFragment"
+            app:destination="@id/accountRegisterFragment" />
+        <action
+            android:id="@+id/action_navigation_settings_to_accountRecoveryFragment"
+            app:destination="@id/accountRecoveryFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_news"
@@ -34,6 +44,12 @@
         <action
             android:id="@+id/action_navigation_account_to_accountLoginFragment"
             app:destination="@id/accountLoginFragment" />
+        <action
+            android:id="@+id/action_navigation_account_to_navigation_settings"
+            app:destination="@id/navigation_settings" />
+        <action
+            android:id="@+id/action_navigation_account_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsOpenedFragment"
@@ -123,5 +139,14 @@
         <action
             android:id="@+id/action_welcomeAccountRecoveryFragment_to_welcomeAccountLoginFragment"
             app:destination="@id/welcomeAccountLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.raremode.gorodskoy.ui.fragments.about.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" >
+        <action
+            android:id="@+id/action_aboutFragment_to_navigation_account"
+            app:destination="@id/navigation_account" />
     </fragment>
 </navigation>

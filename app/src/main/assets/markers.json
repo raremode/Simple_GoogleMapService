@@ -2,7 +2,7 @@
   "markers": [
     {
       "id": 0,
-      "name": "Place0",
+      "name": "Некрасовский пер., 30-32,",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.204630",
@@ -12,7 +12,7 @@
 
     {
       "id": 1,
-      "name": "Place1",
+      "name": "ул. Шевченко, 274",
       "garbageType": "Glass",
       "coordinates": {
         "latitude": "47.205137",
@@ -22,7 +22,7 @@
 
     {
       "id": 2,
-      "name": "Place2",
+      "name": "ул. Ломакина, 128",
       "garbageType": "Batteries",
       "coordinates": {
         "latitude": "47.204880",
@@ -32,7 +32,7 @@
 
     {
       "id": 3,
-      "name": "Place3",
+      "name": "ул. Ломоносова, 69А",
       "garbageType": "Batteries",
       "coordinates": {
         "latitude": "47.230976",
@@ -42,7 +42,7 @@
 
     {
       "id": 4,
-      "name": "Place4",
+      "name": "16-й пер., 7,",
       "garbageType": "Batteries",
       "coordinates": {
         "latitude": "47.217161",
@@ -52,7 +52,7 @@
 
     {
       "id": 5,
-      "name": "Place5",
+      "name": " ул. Дзержинского 165 ТЦ Юность",
       "garbageType": "Batteries",
       "coordinates": {
         "latitude": "47.251831",
@@ -62,7 +62,7 @@
 
     {
       "id": 6,
-      "name": "Place6",
+      "name": "Большая Бульварная ул., 15",
       "garbageType": "Batteries",
       "coordinates": {
         "latitude": "47.245641",
@@ -72,7 +72,7 @@
 
     {
       "id": 7,
-      "name": "Place7",
+      "name": "пер. Итальянский, 30",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.211030",
@@ -82,7 +82,7 @@
 
     {
       "id": 8,
-      "name": "Place8",
+      "name": "Смирновский Переул., 35",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.215169",
@@ -92,7 +92,7 @@
 
     {
       "id": 9,
-      "name": "Place9",
+      "name": "Инструментальная ул., 15А",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.202522",
@@ -102,7 +102,7 @@
 
     {
       "id": 10,
-      "name": "Place10",
+      "name": "ул. Сызранова, 4",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.215949",
@@ -114,7 +114,7 @@
 
     {
       "id": 11,
-      "name": "Place11",
+      "name": "Гарибальди Переул., 40",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.205514",
@@ -123,7 +123,7 @@
     },
     {
       "id": 12,
-      "name": "Place12",
+      "name": "ул. Чехова, 31-25,",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.204951",
@@ -133,7 +133,7 @@
     },
     {
       "id": 13,
-      "name": "Place13",
+      "name": "ул. Чехова, 9-1",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.203604",
@@ -143,7 +143,7 @@
 
     {
       "id": 14,
-      "name": "Place14",
+      "name": "1-й Новый пер., 2",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.269705",
@@ -153,7 +153,7 @@
 
     {
       "id": 15,
-      "name": "Place15",
+      "name": "Добролюбовский пер., 16-20",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.207159",
@@ -163,7 +163,7 @@
 
     {
       "id": 16,
-      "name": "Place16",
+      "name": "ул. Нижняя Линия, 29",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.268851",
@@ -173,7 +173,7 @@
 
     {
       "id": 17,
-      "name": "Place17",
+      "name": "1-й Новый пер.",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.278511",
@@ -183,7 +183,7 @@
 
     {
       "id": 18,
-      "name": "Place18",
+      "name": "ул. 4-я Линия",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.280007",
@@ -193,7 +193,7 @@
 
     {
       "id": 19,
-      "name": "Place19",
+      "name": "Дачная ул., 75",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.275002",
@@ -203,7 +203,7 @@
 
     {
       "id": 20,
-      "name": "Place20",
+      "name": "пер. Гарибальди, 35",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.204812",
@@ -213,7 +213,7 @@
 
     {
       "id": 21,
-      "name": "Place21",
+      "name": "ул. Чехова, 11",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.204067",
@@ -223,7 +223,7 @@
 
     {
       "id": 22,
-      "name": "Place22",
+      "name": "Комсомольский б-р, 21-25",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.206376",
@@ -233,7 +233,7 @@
 
     {
       "id": 23,
-      "name": "Place23",
+      "name": "ул. Шмидта, 3",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.209028",
@@ -243,7 +243,7 @@
 
     {
       "id": 24,
-      "name": "Place24",
+      "name": "ул. Розы Люксембург, 63",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.205982",
@@ -253,7 +253,7 @@
 
     {
       "id": 25,
-      "name": "Place25",
+      "name": "Смирновский пер., 91",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.209623",
@@ -263,7 +263,7 @@
 
     {
       "id": 26,
-      "name": "Place26",
+      "name": "Смирновский пер., 40",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.210967",
@@ -274,7 +274,7 @@
 
     {
       "id": 27,
-      "name": "Place27",
+      "name": "ул. Розы Люксембург, 102",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.210238",
@@ -283,7 +283,7 @@
     },
     {
       "id": 28,
-      "name": "Place28",
+      "name": "Смирновский пер., 26-34",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.212851",
@@ -292,16 +292,17 @@
     },
     {
       "id": 29,
-      "name": "Place29",
+      "name": "Большой Садовый пер., 37",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.222679",
         "longitude": "38.928322"
       }
+
     },
     {
       "id": 30,
-      "name": "Place30",
+      "name": "ул. Турубаровых, 26",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.263493",
@@ -311,7 +312,7 @@
 
     {
       "id": 31,
-      "name": "Place31",
+      "name": "ул. Урицкого, 41",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.264432",
@@ -321,7 +322,7 @@
 
     {
       "id": 32,
-      "name": "Place32",
+      "name": "ул. Бабушкина, 60",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.263562",
@@ -331,7 +332,7 @@
 
     {
       "id": 33,
-      "name": "Place33",
+      "name": "ул. Халтурина, 28",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.257254",
@@ -341,7 +342,7 @@
 
     {
       "id": 34,
-      "name": "Place34",
+      "name": "ул. 70 лет Октября, 23",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.267466",
@@ -351,7 +352,7 @@
 
     {
       "id": 35,
-      "name": "Place35",
+      "name": "Смирновский пер., 91",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.209623",
@@ -361,7 +362,7 @@
 
     {
       "id": 36,
-      "name": "Place36",
+      "name": "ул. Свободы, 11Б",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.205698",
@@ -372,7 +373,7 @@
 
     {
       "id": 37,
-      "name": "Place37",
+      "name": "Михайловская ул., 73",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.264003",
@@ -381,7 +382,7 @@
     },
     {
       "id": 38,
-      "name": "Place38",
+      "name": "ул. Плотникова, 47",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.262097",
@@ -390,14 +391,167 @@
     },
     {
       "id": 39,
-      "name": "Place39",
+      "name": "1-я Котельная ул., 2-4",
       "garbageType": "Plastic",
       "coordinates": {
         "latitude": "47.230213",
         "longitude": "38.918077"
       }
 
-    }
+    },
+    {
+      "id": 40,
+      "name": "ул. Ленина, 127",
+      "garbageType": "Glass",
+      "coordinates": {
+        "latitude": "47.223611",
+        "longitude": "38.916148"
+      }
 
+    },
+
+    {
+      "id": 41,
+      "name": "ул. Ленина, 184",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.226642",
+        "longitude": "38.912057"
+      }
+    },
+
+    {
+      "id": 42,
+      "name": "Цеховой пер., 1/99",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.234484",
+        "longitude": "38.917240"
+      }
+    },
+
+    {
+      "id": 43,
+      "name": "ул. Сызранова, 10 корпус 4",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.217616",
+        "longitude": "38.863241"
+      }
+    },
+
+    {
+      "id": 44,
+      "name": "ул. Сызранова, 10 корпус 4",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.217785",
+        "longitude": "38.863413"
+      }
+    },
+
+    {
+      "id": 45,
+      "name": "ул. Чехова, 336А",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.219069",
+        "longitude": "38.857468"
+      }
+    },
+
+    {
+      "id": 46,
+      "name": "Кавалерийский пер., 257 корпус 1",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.220309",
+        "longitude": "38.856847"
+      }
+    },
+
+
+    {
+      "id": 47,
+      "name": "ул. Чучева, 24",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.217770",
+        "longitude": "38.867323"
+      }
+    },
+
+    {
+      "id": 48,
+      "name": "ул. Чучева, 30",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.215943",
+        "longitude": "38.864762"
+      }
+    },
+
+    {
+      "id": 49,
+      "name": "ул. Чучева, 24",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.216512",
+        "longitude": "38.866963"
+      }
+
+    },
+    {
+      "id": 50,
+      "name": "Александровская ул., 89",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.215240",
+        "longitude": "38.918992"
+      }
+    },
+
+
+    {
+      "id": 51,
+      "name": "Комсомольский пер., 3",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.213853",
+        "longitude": "38.920446"
+      }
+    },
+
+
+    {
+      "id": 52,
+      "name": "Зои Космодемьянской ул., 22",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.258210",
+        "longitude": "38.922394"
+      }
+    },
+
+    {
+      "id": 53,
+      "name": "Новая ул., 13А",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.204189",
+        "longitude": "38.899521"
+      }
+    },
+
+    {
+      "id": 54,
+      "name": "ул. Осипенко, 68",
+      "garbageType": "Plastic",
+      "coordinates": {
+        "latitude": "47.237306",
+        "longitude": "38.921716"
+      }
+
+    }
   ]
 }   

@@ -12,6 +12,7 @@ import com.raremode.gorodskoy.R
 import com.raremode.gorodskoy.databinding.ActivityMainBinding
 import com.raremode.gorodskoy.extensions.beGoneIf
 import com.raremode.gorodskoy.extensions.setupKeyboardListener
+import com.raremode.gorodskoy.ui.fragments.map.MapFragment
 
 class MainActivity : AppCompatActivity() {
 

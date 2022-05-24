@@ -41,6 +41,7 @@ class MapFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var lastLocation: Location? = null
+    private var isFirstOpenFragment = true
     private lateinit var locationPermissionManager: LocationPermissionManager
     private lateinit var locationService: FusedLocationProviderClient
     private var suggestions = emptyList<String>()
@@ -120,7 +121,15 @@ class MapFragment : Fragment() {
                 }
             }
             googleMap.apply {
-                moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(47.223037, 38.913494), 13f)) //дефолтная позиция карты при открытии приложения
+                if (isFirstOpenFragment) {
+                    moveCamera(
+                        CameraUpdateFactory.newLatLngZoom(
+                            LatLng(47.223037, 38.913494),
+                            13f
+                        )
+                    ) //дефолтная позиция карты при открытии приложения
+                    isFirstOpenFragment=false
+                }
                 uiSettings.apply {
                     isMyLocationButtonEnabled = false
                     isZoomControlsEnabled = false
