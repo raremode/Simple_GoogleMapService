@@ -2,12 +2,14 @@ package com.raremode.gorodskoy.ui.fragments.map
 
 import android.annotation.SuppressLint
 import android.app.SearchManager
+import android.content.ContentValues.TAG
 import android.database.Cursor
 import android.database.MatrixCursor
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.provider.BaseColumns
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -121,6 +123,7 @@ class MapFragment : Fragment() {
                 }
             }
             googleMap.apply {
+                Log.d("MapFragment", "$isFirstOpenFragment")
                 if (isFirstOpenFragment) {
                     moveCamera(
                         CameraUpdateFactory.newLatLngZoom(
@@ -129,6 +132,7 @@ class MapFragment : Fragment() {
                         )
                     ) //дефолтная позиция карты при открытии приложения
                     isFirstOpenFragment=false
+                    Log.d("MapFragment", "$isFirstOpenFragment")
                 }
                 uiSettings.apply {
                     isMyLocationButtonEnabled = false
